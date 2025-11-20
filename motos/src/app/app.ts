@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { Login } from './pages/login/login';
+import { Login } from './features/auth/components/login/login';
 
 
 @Component({

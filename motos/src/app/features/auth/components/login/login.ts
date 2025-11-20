@@ -18,17 +18,15 @@ export class Login {
     this.FormLogin = new FormGroup('')
     this.user = new FormControl('')
     this.password = new FormControl('')
-    this.fechaNa = new FormControl('')
 
 
     this.FormLogin = new FormGroup({
       user: this.user,
       password: this.password,
-      fechaNa: this.fechaNa
     })
   }
 
-  NewUser(){
+  Login(){
     console.log(this.FormLogin.value)
     this.FormLogin.reset()
   }
