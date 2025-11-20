@@ -1,0 +1,10 @@
+<form [formGroup]="FormLogin">
+  <input type="text" id="user" formControlName="user">
+  <input type="text" id="password" formControlName="password">
+  <input type="text" id="fechaNa" formControlName="fechaNa">
+  @if (FormLogin.invalid) {
+    <p>requerido</p>
+  }
+
+  <button (click)="NewUser()">mandar</button>
+</form>
