@@ -1,10 +1,18 @@
-<form [formGroup]="FormLogin">
+<div>
+  <form [formGroup]="FormLogin">
+  <label for="">Ingrese el usuario</label>
   <input type="text" id="user" formControlName="user">
+  <label for="">Ingrese la contraseña</label>
   <input type="text" id="password" formControlName="password">
-  <input type="text" id="fechaNa" formControlName="fechaNa">
+  <label for="">Confirmar la contraseña</label>
+  <input type="text" id="password" formControlName="password">
+  <label for="">Ingrese la fecha de nacimiento</label>
+  <input type="date" id="fechaNa" formControlName="fechaNa">
   @if (FormLogin.invalid) {
     <p>requerido</p>
   }
 
   <button (click)="NewUser()">mandar</button>
 </form>
+
+</div>

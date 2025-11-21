@@ -1,5 +1,8 @@
-<form [formGroup]="FormLogin">
+<div>
+  <form [formGroup]="FormLogin">
+  <label for="">Ingrese el usuario</label>
   <input type="text" id="user" formControlName="user">
+  <label for="">Ingrese la contraseña</label>
   <input type="text" id="password" formControlName="password">
   @if (FormLogin.invalid) {
     <p>requerido</p>
@@ -7,3 +10,5 @@
 
   <button (click)="Login()">mandar</button>
 </form>
+
+</div>
