@@ -6,7 +6,7 @@ import { Header } from "./comp_shared/components/header/header";
 
 @Component({
   selector: 'app-root',
-  imports: [Login, Header, RouterOutlet],
+  imports: [Header, RouterOutlet],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
