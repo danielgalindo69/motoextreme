@@ -1,4 +1,7 @@
 package com.motoextreme.motoextreme.models.repositories;
 
-public interface ICarritoItem {
+import com.motoextreme.motoextreme.models.entities.CarritoItem;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface ICarritoItem extends JpaRepository<CarritoItem, Long> {
 }
