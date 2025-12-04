@@ -1,0 +1,175 @@
+body{
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.section1{
+  background-image: linear-gradient(to right, rgb(0, 0, 0), rgba(0,0,0,0)),
+  url('/assets/moto2.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  height: 96vh;
+  display: flex;
+}
+
+.content{
+  padding: 120px 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 46px;
+  max-width: 600px;
+}
+
+.content h2, .content p, .content button {
+  margin: 0;
+}
+
+button{
+  width: fit-content;
+}
+
+.coleccion{
+  background-color: #300204;
+  border: 1px solid #e7000b;
+  display: flex;
+  gap: 6px;
+  border-radius: 25px;
+  color: #e7000b;
+  font-size: 16px;
+  padding: 10px 22px;
+}
+
+h2{
+  font-weight: 300;
+  color: white;
+  font-size: 86px;
+}
+
+span{
+  color: #e7000b;
+}
+
+p{
+  font-size: 20px;
+  width: 35vw;
+  color: white;
+}
+
+.modelos{
+  background-color: #e7000b;
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-size: 16px;
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  color: white;
+  border: none;
+}
+
+.sub-seccion1{
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.sub-seccion1 hr{
+  width: 100%;
+  height: 2px;
+  border: none;
+  background-color: #131a24;
+}
+
+.botones{
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+}
+
+.botones button{
+  background-color: #300204;
+  color: #e7000b;
+  border: none;
+  border-radius: 10px;
+  padding: 12px 15px;
+}
+
+.botones p{
+  align-self: center;
+  font-size: 15px;
+  color: #6b6b6b;
+}
+
+.botones strong{
+  font-size: 17px;
+  color: white;
+}
+
+
+.seccion2{
+  background-color: #000000;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.seccion2 h2{
+  text-align: center;
+  font-size: 52px;
+}
+
+.seccion2 p{
+  width: 100%;
+  color: #748191;
+  text-align: center;
+  font-size: 17px;
+}
+
+.seccion2 h2, .seccion2 p{
+  margin: 0;
+}
+
+.titulo{
+  color: #e7000b;
+  padding-top: 70px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.titulo h3{
+  font-size: 15px;
+}
+
+.titulo hr{
+  border: none;
+  height: 1px;
+  width: 40%;
+}
+
+.hr1{background-image: linear-gradient(to left, rgba(231,0,11), rgb(41, 0, 3));}
+
+.hr2{background-image: linear-gradient(to right, rgba(231,0,11), rgb(41, 0, 3));}
+
+.cards{
+  display: flex;
+  justify-content: space-evenly;
+  padding-top: 45px;
+}
+
+.modelos2{
+  background-color: #ffffff;
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-size: 16px;
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  color: #e7000b;
+  border: 2px solid #e7000b;
+  text-align: center;
+}
+
+.model svg{
+  color: #e7000b;
+}
