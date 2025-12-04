@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { Inicio } from './features/home/components/inicio/inicio';
+import { Inicio } from './features/home/components/inicio/inicio.component';
 import { Modelos } from './features/motos/components/modelos/modelos';
 import { Configurador } from './features/motos/components/configurador/configurador';
 import { Accesorios } from './features/motos/components/accesorios/accesorios';
