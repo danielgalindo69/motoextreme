@@ -1,4 +1,4 @@
 package com.motoextreme.motoextreme.models.repositories;
 
-public class ICarrito {
+public interface ICarrito {
 }
