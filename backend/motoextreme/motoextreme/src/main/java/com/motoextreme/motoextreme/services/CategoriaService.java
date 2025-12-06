@@ -1,33 +1,57 @@
 package com.motoextreme.motoextreme.services;
 
+import com.motoextreme.motoextreme.dtos.request.CategoriaRequestDTO;
+import com.motoextreme.motoextreme.dtos.response.CategoriaResponseDTO;
+import com.motoextreme.motoextreme.mappers.CategoriaMapper;
 import com.motoextreme.motoextreme.models.entities.Categoria;
 import com.motoextreme.motoextreme.models.repositories.ICategoria;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CategoriaService {
 
     @Autowired
     private ICategoria repo;
+    @Autowired
+    private CategoriaMapper mapper;
 
 
-    //listar categorias
-    public List<Categoria> listarCategorias(){
+    //traer los datos de las categorias
+    public List<CategoriaResponseDTO> traerCategorias() {
+        List<Categoria> categorias = repo.findAll();
+        return mapper.toResponseDTOList(categorias);
+    }
 
-        List<Categoria> listasCategorias = repo.findAll();
+    //crear categoria
+    public CategoriaResponseDTO crearCategoria(CategoriaRequestDTO categoriaDTO) {
 
-        if ((listasCategorias != null) && (!listasCategorias.isEmpty())) {
-            return listasCategorias;
-        } else {
+        try {
+            Categoria categoria = mapper.toEntity(categoriaDTO);
+            Categoria categoriaGuardada = repo.save(categoria);
+            return mapper.toCategoriaDto(categoriaGuardada);
+        } catch (Exception e) {
             return null;
         }
     }
 
-    public Categoria crearCategoria(Categoria categoria){
-
-        return repo.save(categoria);
+    //borar categoria
+    public void borrarCategoria(Long id) {
+        repo.deleteById(id);
     }
+
+    //buscar categoria por id
+    public Optional<CategoriaResponseDTO> buscarCategoriaPorId(Long id) {
+        Optional<Categoria> categoria = repo.findById(id);
+        return categoria.map(mapper::toCategoriaDto);
+
+    }
+
 }
+
+
+
