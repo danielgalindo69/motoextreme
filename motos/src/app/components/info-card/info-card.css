@@ -1,0 +1,36 @@
+.info-card{
+    background-color: #080c14;
+    border: 1px solid #121923;
+    border-radius: 12px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    padding: 22px 20px;
+}
+
+.info-card :hover{
+    border-color: #e7000b;
+}
+
+.botones{
+    background-color: #350a12;
+    border: none;
+    padding: 12px;
+    border-radius: 10px;
+}
+
+.botones :hover{
+    background-color: #4b0811;
+}
+
+.cardI{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.cardI h4, .cardI p{margin: 0; font-weight: 200;}
+
+.cardI h4{color: white;}
+
+.cardI p{color: #99a1af;}

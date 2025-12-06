@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { Card } from "../../../../components/card/card";
 import { CommonModule } from '@angular/common';
+import { InfoCard } from "../../../../components/info-card/info-card";
 
 @Component({
   selector: 'app-inicio',
-  imports: [Card, CommonModule],
+  imports: [Card, CommonModule, InfoCard],
   templateUrl: './inicio.component.html',
   styleUrl: './inicio.component.css',
 })
@@ -21,7 +22,7 @@ export class Inicio {
   },
 
   {
-    imagen: 'assets/moto.jpg',
+    imagen: 'assets/moto3.jpg',
     titulo: 'ADVENTURE',
     modelo: 'Adventure X',
     precio: 16.490,
@@ -31,7 +32,7 @@ export class Inicio {
   },
 
   {
-    imagen: 'assets/moto.jpg',
+    imagen: 'assets/moto2.jpg',
     titulo: 'CRUISER',
     modelo: 'Shadow Cruiser',
     precio: 14.990,

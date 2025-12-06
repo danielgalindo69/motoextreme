@@ -8,16 +8,16 @@ body{
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  height: 96vh;
+  padding: 100px 0  20px 40px ;
   display: flex;
+  flex-direction: column;
+  gap: 54px;
 }
 
 .content{
-  padding: 120px 30px;
   display: flex;
   flex-direction: column;
-  gap: 46px;
-  max-width: 600px;
+  gap: 25px;
 }
 
 .content h2, .content p, .content button {
@@ -34,13 +34,14 @@ button{
   display: flex;
   gap: 6px;
   border-radius: 25px;
-  color: #e7000b;
+  color: #c52d35;
   font-size: 16px;
   padding: 10px 22px;
 }
 
 h2{
   font-weight: 300;
+  line-height: 80px;
   color: white;
   font-size: 86px;
 }
@@ -70,23 +71,30 @@ p{
 .sub-seccion1{
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 22px;
 }
 
 .sub-seccion1 hr{
-  width: 100%;
+  width: 40%;
   height: 2px;
   border: none;
-  background-color: #131a24;
+  display: flow-root;
+  margin: 0;
+  background-color: #1a2330;
 }
 
-.botones{
+.botones-line {
   display: flex;
-  flex-direction: row;
-  gap: 12px;
+  gap: 55px; 
 }
 
-.botones button{
+.botones {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.botones button {
   background-color: #300204;
   color: #e7000b;
   border: none;
@@ -94,23 +102,28 @@ p{
   padding: 12px 15px;
 }
 
-.botones p{
-  align-self: center;
-  font-size: 15px;
+.botones p {
+  font-size: 13px;
+  font-weight: 200;
+  width: auto;
   color: #6b6b6b;
 }
 
 .botones strong{
   font-size: 17px;
   color: white;
+  margin: auto;
 }
 
 
+
 .seccion2{
-  background-color: #000000;
+  background-color: #020610;
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  justify-items: center;
+  gap: 24px;
+  padding: 70px 0;
 }
 
 .seccion2 h2{
@@ -131,7 +144,6 @@ p{
 
 .titulo{
   color: #e7000b;
-  padding-top: 70px;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -157,7 +169,7 @@ p{
   padding-top: 45px;
 }
 
-.modelos2{
+.button2 button{
   background-color: #ffffff;
   border-radius: 8px;
   padding: 10px 20px;
@@ -166,10 +178,34 @@ p{
   gap: 5px;
   align-items: center;
   color: #e7000b;
-  border: 2px solid #e7000b;
+  border: 1px solid #e7000b;
   text-align: center;
 }
 
 .model svg{
   color: #e7000b;
+}
+
+.button2{
+  display: flex;
+  justify-content: center;
+}
+
+
+.seccion3{
+  background-color: #000000;
+  padding-top: 70px;
+  display: flex;
+  justify-content: space-around;
+  align-items: start;
+}
+
+.seccion3-img{
+  border-radius: 12px;
+  width: 550px;
+  height: auto;
+}
+
+.contenido-s2{
+  color: white;
 }
