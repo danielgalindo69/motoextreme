@@ -1,10 +1,14 @@
-<div class="info-card">
-    <div>
-        <button class="botones">AAA{{ svg }}</button>
-    </div>
+<div class="card">
+  <div class="card-info">
+      <div>
+        <button class="botones">
+          <img [src]="svg" alt="{{ titulo }}">
+        </button>
+      </div>
 
-    <div class="cardI">
-        <h4>{{ titulo }} hasdfghjk</h4>
-        <p>{{ descripcion }} qwertyhjkl</p>
-    </div>
+      <div class="cardI">
+          <h4>{{ titulo }}</h4>
+          <p>{{ descripcion }}</p>
+      </div>
+  </div>
 </div>

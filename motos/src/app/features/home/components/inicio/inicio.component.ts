@@ -20,7 +20,6 @@ export class Inicio {
     torque: '115 Nm',
     peso: '201 Kg'
   },
-
   {
     imagen: 'assets/moto3.jpg',
     titulo: 'ADVENTURE',
@@ -30,7 +29,6 @@ export class Inicio {
     torque: '143 Nm',
     peso: '244 Kg'
   },
-
   {
     imagen: 'assets/moto2.jpg',
     titulo: 'CRUISER',
@@ -42,4 +40,26 @@ export class Inicio {
   }
 ];
 
+info = [
+  {
+    svg: 'assets/phone.svg',
+    titulo: 'Conectividad Total',
+    descripcion: 'Sistema de navegación integrado, control por voz y conexión con tu smartphone'
+  },
+  {
+    svg: 'assets/shield.svg',
+    titulo: 'Mantenimiento Premium',
+    descripcion: '3 años de mantenimiento gratuito en nuestra red oficial de concesionarios'
+  },
+  {
+    svg: 'assets/wrench.svg',
+    titulo: 'Seguridad Avanzada',
+    descripcion: '3 años de mantenimiento gratuito en nuestra red oficial de concesionariosABS de última generación, control de tracción y modos de conducción inteligentes'
+  },
+  {
+    svg: 'assets/headphones.svg',
+    titulo: 'Soporte 24/7',
+    descripcion: 'Asistencia en carretera las 24 horas y asesoramiento técnico personalizado'
+  }
+];
 }

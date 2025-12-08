@@ -85,7 +85,7 @@ p{
 
 .botones-line {
   display: flex;
-  gap: 55px; 
+  gap: 55px;
 }
 
 .botones {
@@ -194,7 +194,7 @@ p{
 
 .seccion3{
   background-color: #000000;
-  padding-top: 70px;
+  padding: 80px 0;
   display: flex;
   justify-content: space-around;
   align-items: start;
@@ -202,10 +202,137 @@ p{
 
 .seccion3-img{
   border-radius: 12px;
-  width: 550px;
-  height: auto;
+  width: auto;
+  height: 690px;
 }
 
 .contenido-s2{
   color: white;
+  align-items: center;
+}
+
+.contenido-s2 h4, .contenido-s2 h3{
+  margin: 0;
+}
+
+.contenido-s2 h4{
+  font-weight: lighter;
+  letter-spacing: 1px;
+  font-size: 13px;
+  color: #e7000b;
+}
+
+.contenido-s2 h3{
+  font-weight: 100;
+  font-size: 47px;
+}
+
+.contenido-s2 p{
+  font-size: 18px;
+  color: #959dab;
+}
+
+.info-card{
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.seccion4{
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0.91), rgba(152, 41, 41, 0.504)),
+  url('/assets/fondo.jpg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  margin: 0;
+  gap: 35px;
+  color: white;
+  padding: 70px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.seccion4 h3{
+  font-weight: lighter;
+  font-size: 41px;
+}
+
+.text h3, .text p{
+  text-align: center;
+  margin: 0;
+}
+
+.card-form{
+  background-color: rgba(23, 25, 38, 0.947);
+  flex-direction: column;
+  border-radius: 22px;
+  border: 2px solid #252d3b;
+  display: flex;
+  padding: 35px 70px;
+  gap: 30px;
+}
+
+.form{
+  display: flex;
+  gap: 30px;
+}
+
+form{
+  flex-direction: column;
+  display: flex;
+  gap: 40px;
+}
+
+.colum1{
+  flex-direction: column;
+  display: flex;
+  gap: 8px;
+}
+
+input{
+  background-color: #0b0d14;
+  border: 1px solid #252d3b;
+  border-radius: 6px;
+  font-size: 15px;
+  padding: 10px 12px;
+  width: 380px;
+}
+
+.line{
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.line button{
+  background-color: #e7000b;
+  border: none;
+  padding: 14px;
+  color: white;
+  font-size: 16px;
+  width: 840px;
+  text-align: center;
+  border-radius: 8px;
+  font-weight: bold;
+}
+
+.line hr{
+  border: 1px solid #1f2b41;
+  width: 100%;
+}
+
+.botones{
+  justify-content: space-between;
+  display: flex;
+}
+
+.button1{
+  align-items: center;
+  display: flex;
+  gap: 12px;
+}
+
+.button1 h4, .button1 p{
+  margin: 0;
 }
