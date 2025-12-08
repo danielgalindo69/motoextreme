@@ -30,14 +30,11 @@ public class CategoriaService {
     //crear categoria
     public CategoriaResponseDTO crearCategoria(CategoriaRequestDTO categoriaDTO) {
 
-        try {
             Categoria categoria = mapper.toEntity(categoriaDTO);
             Categoria categoriaGuardada = repo.save(categoria);
             return mapper.toCategoriaDto(categoriaGuardada);
-        } catch (Exception e) {
-            return null;
-        }
     }
+
 
     //borar categoria
     public void borrarCategoria(Long id) {
@@ -49,6 +46,23 @@ public class CategoriaService {
         Optional<Categoria> categoria = repo.findById(id);
         return categoria.map(mapper::toCategoriaDto);
 
+    }
+
+    public CategoriaResponseDTO actualizarCategoria(Long id, CategoriaRequestDTO categoriaDTO) {
+
+        Categoria categoria = repo.findById(id)
+                .orElseThrow(() -> new RuntimeException("Categoría no encontrada"));
+
+        categoria.setNombre(categoriaDTO.getNombre());
+        categoria.setDescripcion(categoriaDTO.getDescripcion());
+
+        Categoria categoriaActualizada = repo.save(categoria);
+
+        return new CategoriaResponseDTO(
+                categoriaActualizada.getIdCategoria(),
+                categoriaActualizada.getNombre(),
+                categoriaActualizada.getDescripcion()
+        );
     }
 
 }
