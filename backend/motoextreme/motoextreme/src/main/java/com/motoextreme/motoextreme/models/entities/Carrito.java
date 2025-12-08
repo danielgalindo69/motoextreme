@@ -18,4 +18,12 @@ public class Carrito {
 
     @OneToMany(mappedBy = "carrito", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CarritoItem> items = new ArrayList<>();
+
+    public Double getTotal() {
+        if (items == null) return 0.0;
+
+        return items.stream()
+                .mapToDouble(item -> item.getSubtotal() != null ? item.getSubtotal() : 0.0)
+                .sum();
+    }
 }

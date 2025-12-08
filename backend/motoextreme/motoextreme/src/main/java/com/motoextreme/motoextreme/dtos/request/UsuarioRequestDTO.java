@@ -11,11 +11,8 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor @NoArgsConstructor
 public class UsuarioRequestDTO {
-
-    @NotBlank(message = "El nombre no puede estar vacio")
     private String nombre;
     private String email;
     private String password;
     private Rol rol;
-
 }

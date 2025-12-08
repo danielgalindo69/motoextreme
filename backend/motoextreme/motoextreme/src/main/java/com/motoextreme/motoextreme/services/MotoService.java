@@ -48,11 +48,31 @@ public class MotoService {
         return mapper.toDto(moto);
     }
 
+    //actualizar moto
+    public MotoResponseDTO actualizarMoto(Long id, MotoRequestDTO dto) {
+
+        Moto moto = service.findById(id)
+                .orElseThrow(() -> new RuntimeException("Moto no encontrada"));
+
+        moto.setNombre(dto.getNombre());
+        moto.setModelo(dto.getModelo());
+        moto.setPrecio(dto.getPrecio());
+        moto.setDescripcion(dto.getDescripcion());
+
+        Categoria categoria = categoriaRepository.findById(dto.getIdCategoria())
+                .orElseThrow(() -> new RuntimeException("Categoría no encontrada"));
+
+        moto.setCategoria(categoria);
+
+        Moto actualizada = service.save(moto);
+
+        return mapper.toDto(actualizada);
+    }
+
     //buscar moto por id
     public Optional<MotoResponseDTO> findByid(Long id){
         Optional<Moto> moto = service.findById(id);
         return moto.map(mapper::toDto);
-
     }
 
     //eliminar por id
