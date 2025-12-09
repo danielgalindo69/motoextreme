@@ -1,0 +1,49 @@
+.card{
+  background-color: #080c14;
+  border: 1px solid #25303e;
+  border-radius: 12px;
+  gap: 20px;
+  width: 620px;
+  cursor: pointer;
+  transition: border .3s, transform .3s;
+}
+
+.card:hover{
+  border: 1px solid #c30a1f;
+  transform: scale(1.02);
+}
+
+.card-info{
+  padding: 20px 22px;
+  align-items: center;
+  display: flex;
+  gap: 14px;
+}
+
+.botones{
+  background-color: #350a12;
+  border: none;
+  padding: 12px;
+  border-radius: 10px;
+}
+
+.card:hover .botones{
+  background-color: #4b0811;
+}
+
+.card:hover .botones img{
+  filter: brightness(0) invert(1);
+}
+
+.cardI{
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  border: none;
+}
+
+.cardI h4, .cardI p{margin: 0; font-weight: 200;}
+
+.cardI h4{color: white; font-size: 18px;}
+
+.cardI p{color: #99a1af; font-size: 14px;}
