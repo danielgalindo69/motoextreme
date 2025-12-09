@@ -3,26 +3,31 @@ footer{
   background-color: #000000;
   color: #99a1af;
   padding: 60px 30px;
-  display: flex;
 }
 
-footer h2{
-  margin: 0;
-  color: white;
+.footer{ display: flex; justify-content: space-between; }
+
+footer h3{ margin: 0; color: white; }
+
+.motoElite{
+  flex-direction: column;
+  display: flex;
+  width: 240px;
 }
+
+.motoElite h2{font-weight: lighter;}
+
+.motoElite p{font-size: 15px; line-height: 19px;}
+
+.motoElite span{color: #e7000b;}
 
 .hr1{
-  width: 50%;
+  border: none;
+  height: 1px;
+  background-image: linear-gradient(to left, rgb(0, 0, 0), rgb(231,0,11));
 }
 
-.motoElite span{
-  color: #e7000b;
-}
-
-.iconosElite{
-  display: flex;
-  gap: 13px;
-}
+.iconosElite{ display: flex; gap: 13px; }
 
 .iconosElite button{
   background-color: #0c131f;
@@ -30,3 +35,69 @@ footer h2{
   border: none;
   padding: 4px;
 }
+
+.list{
+  flex-direction: column;
+  display: flex;
+  justify-content: start;
+}
+
+ul{
+  flex-direction: column;
+  display: flex;
+  gap: 16px;
+  padding: 0;
+}
+
+li{
+  transition: transform .3s;
+  list-style: none;
+  font-size: 14px;
+}
+
+li:hover{ transform: scale(1.02); color: #e7000b;}
+
+.form{ display: flex; gap: 13px; }
+
+input{
+  background-color: #131622;
+  border: 1px solid #2d3746;
+  border-radius: 6px;
+  padding: 8px;
+  width: 250px;
+}
+
+button{
+  background-color: #e7000b;
+  padding: 7px;
+  width: 80px;
+  color: white;
+  border: none;
+  border-radius: 6px;
+}
+
+.icons{
+  flex-direction: column;
+  display: flex;
+  gap: 8px;
+  padding: 17px 0px;
+}
+
+.icon1{
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0;
+}
+
+.newsletter p{font-size: 15px;}
+
+.icon1 p{ margin: 0;}
+
+.hr2{
+  height: 1px;
+  border: none;
+  background-color: #2d3746;
+}
+
+.copyright{text-align: center; font-size: 13px; padding: 10px;}

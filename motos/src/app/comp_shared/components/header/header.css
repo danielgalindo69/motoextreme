@@ -1,12 +1,10 @@
-*{
-  font-family: Arial, Helvetica, sans-serif;
-}
+*{font-family: Arial, Helvetica, sans-serif;}
 
 nav{
   background-image: linear-gradient(to right, rgb(0, 0, 0), rgba(7, 0, 0, 0.877));
   position: fixed;
   top: 0;
-  width: 95%;
+  width: 96%;
   height: 70px;
   display: flex;
   justify-content: space-between;
@@ -15,9 +13,7 @@ nav{
   border-bottom: 0.1px solid #4f0307;
 }
 
-.active{
-  color: #e7000b;
-}
+.active{ color: #e7000b;}
 
 .menuH{
   border: none;
@@ -27,13 +23,9 @@ nav{
   cursor: pointer;
 }
 
-span{
-  color: #e7000b;
-}
+span{color: #e7000b;}
 
-hr{
-  color: #e7000b;
-}
+hr{ color: #e7000b;}
 
 ul{
   display: flex;
@@ -44,16 +36,8 @@ ul{
   margin: 0;
 }
 
-a:hover{
-  color: #e7000b;
-}
+a:hover{ color: #e7000b;}
 
-h1{
-  color: white;
-  font-weight: 300;
-}
+h1{ color: white; font-weight: 300;}
 
-a{
-  text-decoration: none;
-  color: white;
-}
+a{ text-decoration: none; color: white;}
