@@ -1,20 +1,19 @@
 package com.motoextreme.motoextreme.controllers;
+import org.springframework.security.access.prepost.PreAuthorize;
 
 import com.motoextreme.motoextreme.dtos.request.CategoriaRequestDTO;
 import com.motoextreme.motoextreme.dtos.response.CategoriaResponseDTO;
-import com.motoextreme.motoextreme.models.entities.Categoria;
 import com.motoextreme.motoextreme.services.CategoriaService;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
+
 @RestController
 @RequestMapping("/categorias")
+@PreAuthorize(("hasRole('ADMIN')"))
 public class CategoriaController {
 
     private final CategoriaService service;
@@ -25,12 +24,14 @@ public class CategoriaController {
 
     // Obtener todas las categorías
     @GetMapping
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     public ResponseEntity<List<CategoriaResponseDTO>> obtenerCategorias() {
         return ResponseEntity.ok(service.traerCategorias());
     }
 
     // Crear categoría
     @PostMapping
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<CategoriaResponseDTO> crearCategoria(
             @Valid @RequestBody CategoriaRequestDTO categoriaDTO) {
 
@@ -40,6 +41,7 @@ public class CategoriaController {
 
     // Obtener categoría por ID
     @GetMapping("/{id}")
+    @PreAuthorize("hasAnyRole('USER','ADMIN')")
     public ResponseEntity<CategoriaResponseDTO> obtenerPorId(@PathVariable Long id) {
         return service.buscarCategoriaPorId(id)
                 .map(ResponseEntity::ok)
@@ -48,6 +50,7 @@ public class CategoriaController {
 
     // Actualizar categoría
     @PutMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<CategoriaResponseDTO> actualizarCategoria(
             @PathVariable Long id,
             @Valid @RequestBody CategoriaRequestDTO categoriaDTO) {
@@ -58,6 +61,7 @@ public class CategoriaController {
 
     // Eliminar categoría
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Void> eliminarCategoria(@PathVariable Long id) {
         service.borrarCategoria(id);
         return ResponseEntity.noContent().build();

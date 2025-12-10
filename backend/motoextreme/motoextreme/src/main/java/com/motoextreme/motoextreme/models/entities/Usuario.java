@@ -24,4 +24,6 @@ public class Usuario {
 
     @OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
     private Carrito carrito;
+
+    private boolean enabled = true;
 }

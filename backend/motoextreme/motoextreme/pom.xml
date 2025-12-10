@@ -25,6 +25,19 @@
 	</properties>
 
 	<dependencies>
+		<!-- Spring Security deoendencia-->
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+
+		<!-- JWT dependencia-->
+		<dependency>
+			<groupId>com.auth0</groupId>
+			<artifactId>java-jwt</artifactId>
+			<version>4.4.0</version>
+		</dependency>
 
 		<!-- SPRING BOOT BASICS -->
 		<dependency>
