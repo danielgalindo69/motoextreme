@@ -1,6 +1,7 @@
 package com.motoextreme.motoextreme.dtos.request;
 
 import com.motoextreme.motoextreme.models.enums.Rol;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -12,7 +13,10 @@ import lombok.Setter;
 @AllArgsConstructor @NoArgsConstructor
 public class UsuarioRequestDTO {
     private String nombre;
+
+    @Email
     private String email;
+
     private String password;
     private Rol rol;
 }

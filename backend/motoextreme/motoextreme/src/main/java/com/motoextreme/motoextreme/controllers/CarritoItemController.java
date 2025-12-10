@@ -7,6 +7,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,9 +20,8 @@ public class CarritoItemController {
 
     // Agregar un item al carrito
     @PostMapping("/{carritoId}/agregar")
-    public ResponseEntity<CarritoItemResponseDTO> agregarItem(
-            @PathVariable Long carritoId,
-            @Valid @RequestBody CarritoItemRequestDTO dto) {
+    @PreAuthorize("hasAnyRole('USER','ADMIN')")
+    public ResponseEntity<CarritoItemResponseDTO> agregarItem(@PathVariable Long carritoId, @Valid @RequestBody CarritoItemRequestDTO dto) {
 
         CarritoItemResponseDTO nuevo = service.agregarItemAlCarrito(carritoId, dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(nuevo);
@@ -29,9 +29,8 @@ public class CarritoItemController {
 
     // Actualizar la cantidad de un item en el carrito
     @PutMapping("/{itemId}")
-    public ResponseEntity<CarritoItemResponseDTO> actualizarItem(
-            @PathVariable Long itemId,
-            @Valid @RequestBody CarritoItemRequestDTO dto) {
+    @PreAuthorize("hasAnyRole('USER','ADMIN')")
+    public ResponseEntity<CarritoItemResponseDTO> actualizarItem(@PathVariable Long itemId, @Valid @RequestBody CarritoItemRequestDTO dto) {
 
         CarritoItemResponseDTO actualizado = service.actualizarItem(itemId, dto);
         return ResponseEntity.ok(actualizado);
@@ -39,6 +38,7 @@ public class CarritoItemController {
 
     // Eliminar un item del carrito
     @DeleteMapping("/{itemId}")
+    @PreAuthorize("hasAnyRole('USER','ADMIN')")
     public ResponseEntity<Void> eliminarItem(@PathVariable Long itemId) {
         service.eliminarItem(itemId);
         return ResponseEntity.noContent().build();

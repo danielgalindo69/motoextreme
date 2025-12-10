@@ -7,6 +7,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,24 +15,28 @@ import java.util.List;
 @RestController
 @RequestMapping("/accesorios")
 @RequiredArgsConstructor
+
 public class AccesorioController {
 
     private final AccesorioService service;
 
     // Obtener todos los accesorios
     @GetMapping
+    @PreAuthorize("hasAnyRole('USER','ADMIN')")
     public ResponseEntity<List<AccesorioResponseDTO>> obtenerAccesorios() {
         return ResponseEntity.ok(service.obtenerTodos());
     }
 
     // Obtener accesorio por id
     @GetMapping("/{id}")
+    @PreAuthorize("hasAnyRole('USER','ADMIN')")
     public ResponseEntity<AccesorioResponseDTO> obtenerPorId(@PathVariable Long id) {
         return ResponseEntity.ok(service.obtenerPorId(id));
     }
 
     // Crear accesorio
     @PostMapping
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<AccesorioResponseDTO> crearAccesorio(@Valid @RequestBody AccesorioRequestDTO dto) {
 
         AccesorioResponseDTO nuevo = service.crear(dto);
@@ -40,6 +45,7 @@ public class AccesorioController {
 
     // Actualizar accesorio
     @PutMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<AccesorioResponseDTO> actualizarAccesorio(
             @PathVariable Long id,
             @Valid @RequestBody AccesorioRequestDTO dto) {
@@ -50,6 +56,7 @@ public class AccesorioController {
 
     // Eliminar accesorio
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Void> eliminarAccesorio(@PathVariable Long id) {
         service.eliminar(id);
         return ResponseEntity.noContent().build();
