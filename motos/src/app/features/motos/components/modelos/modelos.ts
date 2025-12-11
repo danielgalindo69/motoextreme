@@ -5,7 +5,7 @@ import { MotosService } from '../../../../servicios/motosService'
 
 @Component({
   selector: 'app-modelos',
-  imports: [CommonModule, CardModelos],
+  imports: [CommonModule],
   templateUrl: './modelos.html',
   styleUrl: './modelos.css',
 })

@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
+import { Modelos } from '../features/motos/components/modelos/modelos';
 
-import { Modelos } from './motosService';
 
 describe('Modelos', () => {
   let service: Modelos;
@@ -14,3 +14,4 @@ describe('Modelos', () => {
     expect(service).toBeTruthy();
   });
 });
+
