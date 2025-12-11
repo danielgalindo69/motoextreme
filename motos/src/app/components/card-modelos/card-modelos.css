@@ -1,78 +1,92 @@
-.card{
-  background-color: #080c17;
-  border-radius: 13px;
-  border: 1.6px solid #202a43;
-  width: 410px;
+.lista-motos {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 25px;
+  margin-top: 30px;
+  padding: 10px;
+}
+
+.card-moto {
+  background: #040819;
+  border: 1px solid #1a2540;
+  border-radius: 12px;
+  overflow: hidden;
+  color: white;
+  transition: all 0.3s ease;
+}
+
+.card-moto:hover {
+  transform: scale(1.03);
+  box-shadow: 0 0 12px rgba(255, 0, 0, 0.3);
+}
+
+.card-img img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  background: #000;
+}
+
+.card-body {
+  padding: 15px;
+}
+
+.card-body h3 {
+  font-size: 20px;
+  margin: 0 0 10px 0;
+}
+
+.details {
   display: flex;
-  flex-direction: column;
-  padding-bottom: 20px;
-}
-
-.card img{
-  border-top-left-radius: 13px;
-  border-top-right-radius: 13px;
-  width: 410px;
-  height: 280px;
-}
-
-.card:hover{ border-color: #e7000b;}
-
-.contenido h3, .contenido p{ margin: 0;}
-
-.contenido{
-  padding: 30px 17px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.contenido h3{
-  font-weight: lighter;
+  justify-content: space-between;
   font-size: 14px;
-  color: #e7000b;
+  margin-bottom: 10px;
 }
 
-.modelo{
-  font-size: 24px;
-  color: white;
+.categoria {
+  background: #e7000b;
+  padding: 4px 8px;
+  border-radius: 6px;
 }
 
-.precio{
-  font-size: 27px;
-  color: white;
+.precio {
+  font-weight: bold;
+  font-size: 16px;
 }
 
-.precio span{
-  color: #748191;
-  font-size: 14px;
+.descripcion {
+  font-size: 13px;
+  opacity: 0.8;
+  margin-bottom: 15px;
 }
 
-.icons{
-  display: flex;
-  justify-content: space-around;
-
-}
-
-svg{ color: #e7000b;}
-
-.icon1{ text-align: center; padding-bottom: 9px;}
-
-.tituloIcon{
-  padding-top: 8px;
-  font-size: 15px;
-  color: white;
-  margin: 0;
-}
-
-.subTIcon{
-  color: #748191;
-  font-size: 12px;
-  margin: 0;
-}
-
-hr{
-  background-color: #182b43;
+.btn-ver {
+  width: 100%;
+  padding: 10px;
   border: none;
-  height: 1px;
-  width: 85%;
+  background: #e7000b;
+  color: white;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.btn-ver:hover {
+  background: #b90009;
+}
+
+.lista-motos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.card-moto {
+  background-color: #040819;
+  border: 1px solid #182541;
+  border-radius: 10px;
+  padding: 15px;
+  width: 200px;
+  color: white;
 }

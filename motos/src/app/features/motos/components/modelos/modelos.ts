@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CardModelos } from '../../../../components/card-modelos/card-modelos';
+import { MotosService } from '../../../../servicios/motosService'
 
 @Component({
   selector: 'app-modelos',
@@ -9,69 +10,85 @@ import { CardModelos } from '../../../../components/card-modelos/card-modelos';
   styleUrl: './modelos.css',
 })
 
-export class Modelos {
-  motos = [
-    { nombre: 'Yamaha R1', categoria: 'deportiva', precio: 65000000 },
-    { nombre: 'Honda CBR 500', categoria: 'deportiva', precio: 32000000 },
-    { nombre: 'Harley Davidson', categoria: 'cruiser', precio: 72000000 },
-    { nombre: 'Kawasaki Z650', categoria: 'naked', precio: 29000000 },
-    { nombre: 'BMW GS 1200', categoria: 'adventure', precio: 58000000 },
-    { nombre: 'Honda Goldwing', categoria: 'touring', precio: 90000000 }
-  ];
+export class Modelos implements OnInit{
 
-  motosFiltradas = [...this.motos]
+  // Datos originales desde API
+  motosOriginal: any[] = [];
 
+  // Datos filtrados (lo que se muestra en pantalla)
+  motosFiltradas: any[] = [];
+
+  // Valores de filtro
   minValue: number = 3000000;
   maxValue: number = 70000000;
 
-  updateMinPrice(event: any){
-    const value = Number(event.target.value);
-
-    if(value >= this.maxValue){
-      this.minValue = this.maxValue - 100000;
-    }else {
-      this.minValue = value;
-    }
-    this.applyFilters(); // Llama filtro automáticamente
-  }
-
-  updateMaxPrice(event: any){
-    const value = Number(event.target.value);
-
-    if(value <= this.minValue){
-      this.minValue = this.maxValue + 100000;
-    }else{
-      this.maxValue = value
-    }
-    this.applyFilters();
-  }
-
-
   categoriasSeleccionadas: string[] = [];
 
-  toggleCategory(event: any){
-    const categoria = event.target.value;
+  constructor(private motosService: MotosService) {}
 
-    if(event.target.checked){
-      this.categoriasSeleccionadas.push(categoria);
-    }else{
-      this.categoriasSeleccionadas = this.categoriasSeleccionadas.filter(c => c !== categoria);
+  ngOnInit(): void {
+    this.motosService.getMotos().subscribe(data => {
+      this.motosOriginal = data;
+      this.motosFiltradas = data; // mostrar todo al inicio
+    });
+  }
+
+  // Rango mínimo
+  updateMinPrice(event: any) {
+    const value = Number(event.target.value);
+
+    if (value >= this.maxValue) {
+      this.minValue = this.maxValue - 100000;
+    } else {
+      this.minValue = value;
     }
     this.applyFilters();
   }
 
-  applyFilters(){
-    this.motosFiltradas = this.motos.filter(moto => {
+  // Rango máximo
+  updateMaxPrice(event: any) {
+    const value = Number(event.target.value);
 
-      const coincideCategoria =
-        this.categoriasSeleccionadas.length === 0 ||
-        this.categoriasSeleccionadas.includes(moto.categoria)
+    if (value <= this.minValue) {
+      this.maxValue = this.minValue + 100000;
+    } else {
+      this.maxValue = value;
+    }
+    this.applyFilters();
+  }
 
-      const coincidePrecio =
-        moto.precio >= this.minValue &&
-        moto.precio <= this.maxValue;
+  // Checkbox de categorías
+  toggleCategory(event: any) {
+    const categoria = event.target.value;
 
-      return coincideCategoria && coincidePrecio;
-    })
+    if (event.target.checked) {
+      this.categoriasSeleccionadas.push(categoria);
+    } else {
+      this.categoriasSeleccionadas =
+        this.categoriasSeleccionadas.filter(c => c !== categoria);
+    }
+
+    this.applyFilters();
+  }
+
+  // FILTRADO COMPLETO
+  applyFilters() {
+    let data = [...this.motosOriginal];
+
+    // 1. Filtrar por categoría
+    if (this.categoriasSeleccionadas.length > 0 &&
+        !this.categoriasSeleccionadas.includes('todas')) {
+
+      data = data.filter(moto =>
+        this.categoriasSeleccionadas.includes(moto.categoria.toLowerCase())
+      );
+    }
+
+    // 2. Filtrar por precio
+    data = data.filter(moto =>
+      moto.precio >= this.minValue && moto.precio <= this.maxValue
+    );
+
+    this.motosFiltradas = data;
   }
 }

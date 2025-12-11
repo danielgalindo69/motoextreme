@@ -81,9 +81,12 @@
       </div>
     </div>
 
-    <div>
-      <div></div>
-      <app-card-modelos></app-card-modelos>
+    <div class="lista-motos">
+      <div *ngFor="let moto of motosFiltradas" class="card-moto">
+        <h3>{{ moto.nombre }}</h3>
+        <p>Categoría: {{ moto.categoria }}</p>
+        <p>Precio: ${{ moto.precio | number:'1.0-0' }}</p>
+      </div>
     </div>
 
   </div>
