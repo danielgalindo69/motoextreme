@@ -1,0 +1,122 @@
+.accesorios-container {
+  background-color: #02040b;
+  min-height: 100vh;
+  padding: 40px;
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.titulo {
+  font-size: 28px;
+  margin-bottom: 25px;
+  color: #fff;
+  font-weight: 100;
+}
+
+.grid-accesorios {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+  gap: 35px;
+}
+
+.card-accesorio {
+  background-color: #070c18;
+  border: 1px solid #182541;
+  border-radius: 14px;
+  overflow: hidden;
+  transition: 0.25s;
+}
+
+.card-accesorio:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 0 25px rgba(231, 0, 11, 0.2);
+}
+
+.card-img {
+  position: relative;
+}
+
+.card-img img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  display: block;
+}
+
+.tag-nuevo,
+.tag-premium {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: bold;
+  color: white;
+}
+
+.tag-nuevo {
+  background-color: #e7000b;
+}
+
+.tag-premium {
+  background-color: #c59e26;
+  top: 45px;
+}
+
+.card-body {
+  padding: 18px 20px;
+}
+
+.categoria {
+  font-size: 11px;
+  color: #c59e26;
+  text-transform: uppercase;
+}
+
+.nombre {
+  margin: 5px 0;
+  font-size: 20px;
+}
+
+.descripcion {
+  opacity: 0.7;
+  font-size: 14px;
+  margin-bottom: 10px;
+  min-height: 45px;
+}
+
+.rating {
+  margin: 10px 0;
+}
+
+.reviews {
+  opacity: 0.6;
+  font-size: 13px;
+}
+
+.precios {
+  margin: 10px 0 20px;
+}
+
+.precio-final {
+  font-size: 26px;
+  font-weight: bold;
+  color: #fff;
+}
+
+.btn-carrito {
+  width: 100%;
+  padding: 12px;
+  background-color: #e7000b;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background .2s;
+}
+
+.btn-carrito:hover {
+  background-color: #ff1a22;
+}

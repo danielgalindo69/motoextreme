@@ -3,6 +3,8 @@ package com.motoextreme.motoextreme.controllers;
 import com.motoextreme.motoextreme.dtos.request.AccesorioRequestDTO;
 import com.motoextreme.motoextreme.dtos.response.AccesorioResponseDTO;
 import com.motoextreme.motoextreme.services.AccesorioService;
+
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -20,19 +22,16 @@ public class AccesorioController {
 
     private final AccesorioService service;
 
-    // Obtener todos los accesorios
     @GetMapping
-    @PreAuthorize("hasAnyRole('USER','ADMIN')")
     public ResponseEntity<List<AccesorioResponseDTO>> obtenerAccesorios() {
         return ResponseEntity.ok(service.obtenerTodos());
     }
 
-    // Obtener accesorio por id
     @GetMapping("/{id}")
-    @PreAuthorize("hasAnyRole('USER','ADMIN')")
     public ResponseEntity<AccesorioResponseDTO> obtenerPorId(@PathVariable Long id) {
         return ResponseEntity.ok(service.obtenerPorId(id));
     }
+
 
     // Crear accesorio
     @PostMapping
@@ -43,16 +42,23 @@ public class AccesorioController {
         return ResponseEntity.status(HttpStatus.CREATED).body(nuevo);
     }
 
-    // Actualizar accesorio
     @PutMapping("/{id}")
-    @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<AccesorioResponseDTO> actualizarAccesorio(
-            @PathVariable Long id,
-            @Valid @RequestBody AccesorioRequestDTO dto) {
+public ResponseEntity<AccesorioResponseDTO> actualizarAccesorio(
+        @PathVariable Long id,
+        @Valid @RequestBody AccesorioRequestDTO dto,
+        HttpServletRequest request) {
 
-        AccesorioResponseDTO actualizado = service.actualizar(id, dto);
-        return ResponseEntity.ok(actualizado);
-    }
+    System.out.println(">>> Método llamado desde: " + request.getRemoteAddr() +
+                       " - " + request.getMethod() +
+                       " - " + System.currentTimeMillis());
+
+    System.out.println("Actualizando accesorio con id " + id + " y dto: " + dto);
+    AccesorioResponseDTO actualizado = service.actualizar(id, dto);
+    System.out.println(">>> Finalizó correctamente");
+    return ResponseEntity.ok(actualizado);
+}
+
+
 
     // Eliminar accesorio
     @DeleteMapping("/{id}")

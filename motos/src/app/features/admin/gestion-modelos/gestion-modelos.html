@@ -1,0 +1,55 @@
+<h2>Gestión de Motos</h2>
+
+<!-- FORMULARIO DE CREAR -->
+<form (ngSubmit)="crearMoto()">
+
+  <input [(ngModel)]="nuevaMoto.nombre" name="nombreNuevo" placeholder="Nombre" required />
+
+  <input [(ngModel)]="nuevaMoto.descripcion" name="descripcionNuevo" placeholder="Descripción" />
+
+  <input [(ngModel)]="nuevaMoto.precio" name="precioNuevo" type="number" placeholder="Precio" required />
+
+  <input [(ngModel)]="nuevaMoto.marca" name="marcaNuevo" placeholder="Marca" required />
+
+  <input [(ngModel)]="nuevaMoto.modelo" name="modeloNuevo" placeholder="Modelo" required />
+
+  <input [(ngModel)]="nuevaMoto.cilindraje" name="cilindrajeNuevo" placeholder="Cilindraje" required />
+
+  <input [(ngModel)]="nuevaMoto.potencia" name="potenciaNuevo" placeholder="Potencia" required />
+
+  <input [(ngModel)]="nuevaMoto.idCategoria" name="categoriaNuevo" type="number" placeholder="ID Cat." required />
+
+  <button type="submit">Crear</button>
+</form>
+
+<hr>
+
+<ul>
+  <li *ngFor="let moto of motos; let i = index">
+
+
+    <div *ngIf="moto.editando !== true">
+      {{ moto.nombre }} - {{ moto.precio }} COP - {{ moto.marca }} - {{ moto.modelo }} - Categoría: {{ moto.idCategoria }}
+
+      <button (click)="moto.editando = true">Editar</button>
+      <button (click)="eliminarMoto(moto.idMoto)">Eliminar</button>
+    </div>
+
+    <!-- MODO EDICIÓN -->
+    <div *ngIf="moto.editando === true">
+
+      <input [(ngModel)]="moto.nombre" name="nombre{{i}}" />
+      <input [(ngModel)]="moto.descripcion" name="descripcion{{i}}" />
+      <input [(ngModel)]="moto.precio" type="number" name="precio{{i}}" />
+      <input [(ngModel)]="moto.marca" name="marca{{i}}" />
+      <input [(ngModel)]="moto.modelo" name="modelo{{i}}" />
+      <input [(ngModel)]="moto.cilindraje" name="cilindraje{{i}}" />
+      <input [(ngModel)]="moto.potencia" name="potencia{{i}}" />
+      <input [(ngModel)]="moto.idCategoria" type="number" name="categoria{{i}}" />
+
+      <button (click)="guardarEdicionMoto(moto)">Guardar</button>
+      <button (click)="moto.editando = false">Cancelar</button>
+    </div>
+
+  </li>
+</ul>

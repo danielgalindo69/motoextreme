@@ -4,12 +4,11 @@ import lombok.Data;
 
 @Data
 public class CarritoItemResponseDTO {
-
-    private Long id;
-    private int cantidad;
+    private Long idItem;
+    private String tipo;           // "MOTO" o "ACCESORIO"
+    private Long referenciaId;     // idMoto o idAccesorio
+    private String nombre;
+    private Integer cantidad;
     private Double precioUnitario;
     private Double subtotal;
-
-    private Long motoId;
-    private Long accesorioId;
 }

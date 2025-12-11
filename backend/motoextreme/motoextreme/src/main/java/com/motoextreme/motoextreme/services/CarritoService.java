@@ -1,7 +1,8 @@
 package com.motoextreme.motoextreme.services;
 
+import com.motoextreme.motoextreme.dtos.response.CarritoItemResponseDTO;
 import com.motoextreme.motoextreme.dtos.response.CarritoResponseDTO;
-import com.motoextreme.motoextreme.mappers.CarritoMapper;
+import com.motoextreme.motoextreme.mappers.CarritoItemMapper;
 import com.motoextreme.motoextreme.models.entities.Carrito;
 import com.motoextreme.motoextreme.models.entities.Usuario;
 import com.motoextreme.motoextreme.models.repositories.ICarrito;
@@ -9,77 +10,61 @@ import com.motoextreme.motoextreme.models.repositories.IUsuario;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class CarritoService {
 
     private final ICarrito carritoRepository;
     private final IUsuario usuarioRepository;
-    private final CarritoMapper carritoMapper;
+    private final CarritoItemMapper itemMapper;
 
-    // Crear carrito para un usuario
-    public CarritoResponseDTO crearCarritoParaUsuario(Long idUsuario) {
-        Usuario usuario = usuarioRepository.findById(idUsuario)
+    public CarritoResponseDTO obtenerCarritoPorUsuario(Long usuarioId) {
+        Carrito carrito = carritoRepository.findByUsuario_IdUsuario(usuarioId)
+                .orElseThrow(() -> new RuntimeException("Carrito no encontrado para el usuario"));
+
+        return toDTO(carrito);
+    }
+
+    public CarritoResponseDTO crearCarritoParaUsuario(Long usuarioId) {
+        Usuario usuario = usuarioRepository.findById(usuarioId)
                 .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
 
-        if (usuario.getCarrito() != null) {
-            throw new RuntimeException("El usuario ya tiene un carrito asignado");
+        Carrito carrito = carritoRepository.findByUsuario_IdUsuario(usuarioId).orElse(null);
+        if (carrito == null) {
+            carrito = new Carrito();
+            carrito.setUsuario(usuario);
+            carrito = carritoRepository.save(carrito);
         }
-
-        Carrito carrito = new Carrito();
-        carrito.setUsuario(usuario);
-
-        Carrito guardado = carritoRepository.save(carrito);
-
-        usuario.setCarrito(guardado);
-        usuarioRepository.save(usuario);
-
-        return carritoMapper.toDTO(guardado);
+        return toDTO(carrito);
     }
 
-    // Obtener carrito por id
-    public CarritoResponseDTO obtenerCarrito(Long idCarrito) {
-
-        Carrito carrito = carritoRepository.findById(idCarrito)
+    public CarritoResponseDTO obtenerCarrito(Long carritoId) {
+        Carrito carrito = carritoRepository.findById(carritoId)
                 .orElseThrow(() -> new RuntimeException("Carrito no encontrado"));
-
-        return carritoMapper.toDTO(carrito);
+        return toDTO(carrito);
     }
 
-    // Obtener carrito por usuario
-    public CarritoResponseDTO obtenerCarritoPorUsuario(Long idUsuario) {
-
-        Usuario usuario = usuarioRepository.findById(idUsuario)
-                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
-
-        if (usuario.getCarrito() == null) {
-            throw new RuntimeException("El usuario no tiene carrito asignado");
-        }
-
-        return carritoMapper.toDTO(usuario.getCarrito());
-    }
-
-    // Vaciar carrito
-    public CarritoResponseDTO vaciarCarrito(Long idCarrito) {
-
-        Carrito carrito = carritoRepository.findById(idCarrito)
+    public void vaciarCarrito(Long carritoId) {
+        Carrito carrito = carritoRepository.findById(carritoId)
                 .orElseThrow(() -> new RuntimeException("Carrito no encontrado"));
-
-        carrito.getItems().clear(); //los borra de DB
-
-        Carrito guardado = carritoRepository.save(carrito);
-
-        return carritoMapper.toDTO(guardado);
+        carrito.getItems().clear();
+        carritoRepository.save(carrito);
     }
 
-    // Eliminar carrito completamente
-    public void eliminarCarrito(Long idCarrito) {
+    private CarritoResponseDTO toDTO(Carrito carrito) {
+        CarritoResponseDTO dto = new CarritoResponseDTO();
+        dto.setIdCarrito(carrito.getIdCarrito());
+        dto.setUsuarioId(carrito.getUsuario().getIdUsuario()); // ajusta si el campo difiere
+        dto.setTotal(BigDecimal.valueOf(carrito.getTotal()));
 
-        if (!carritoRepository.existsById(idCarrito)) {
-            throw new RuntimeException("El carrito no existe");
-        }
 
-        carritoRepository.deleteById(idCarrito);
+        List<CarritoItemResponseDTO> items = carrito.getItems().stream()
+                .map(itemMapper::toDTO)
+                .toList();
+        dto.setItems(items);
+        return dto;
     }
 }
-

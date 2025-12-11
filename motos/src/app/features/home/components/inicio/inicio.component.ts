@@ -2,10 +2,13 @@ import { Component } from '@angular/core';
 import { Card } from "../../../../components/card/card";
 import { CommonModule } from '@angular/common';
 import { InfoCard } from "../../../../components/info-card/info-card";
+import { RouterLink } from '@angular/router';
+import { Footer } from "../../../../comp_shared/components/footer/footer";
+import { Header } from "../../../../comp_shared/components/header/header";
 
 @Component({
   selector: 'app-inicio',
-  imports: [Card, CommonModule, InfoCard],
+  imports: [Card, CommonModule, InfoCard, Footer, Header],
   templateUrl: './inicio.component.html',
   styleUrl: './inicio.component.css',
 })

@@ -3,6 +3,8 @@ package com.motoextreme.motoextreme.security.jwt;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -50,5 +52,14 @@ public class JwtService {
     // Decodificar token
     private DecodedJWT getDecoded(String token) {
         return JWT.require(getAlgorithm()).build().verify(token);
+    }
+
+    // 👇 Nuevo método para crear el AuthenticationToken
+    public UsernamePasswordAuthenticationToken getAuthenticationToken(UserDetails userDetails) {
+        return new UsernamePasswordAuthenticationToken(
+                userDetails,
+                null,
+                userDetails.getAuthorities()
+        );
     }
 }

@@ -5,7 +5,6 @@ import com.motoextreme.motoextreme.dtos.response.AccesorioResponseDTO;
 import com.motoextreme.motoextreme.models.entities.Accesorio;
 import com.motoextreme.motoextreme.models.entities.Categoria;
 import lombok.RequiredArgsConstructor;
-import org.mapstruct.Mapper;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

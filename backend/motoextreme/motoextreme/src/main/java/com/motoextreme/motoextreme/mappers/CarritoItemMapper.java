@@ -1,5 +1,5 @@
 package com.motoextreme.motoextreme.mappers;
-import com.motoextreme.motoextreme.dtos.request.CarritoItemRequestDTO;
+
 import com.motoextreme.motoextreme.dtos.response.CarritoItemResponseDTO;
 import com.motoextreme.motoextreme.models.entities.CarritoItem;
 import org.springframework.stereotype.Component;
@@ -9,28 +9,24 @@ public class CarritoItemMapper {
 
     public CarritoItemResponseDTO toDTO(CarritoItem item) {
         CarritoItemResponseDTO dto = new CarritoItemResponseDTO();
-
-        dto.setId(item.getIdCarritoItem());
+        dto.setIdItem(item.getIdCarritoItem());
         dto.setCantidad(item.getCantidad());
         dto.setPrecioUnitario(item.getPrecioUnitario());
         dto.setSubtotal(item.getSubtotal());
 
         if (item.getMoto() != null) {
-            dto.setMotoId(item.getMoto().getIdMoto());
-        }
-
-        if (item.getAccesorio() != null) {
-            dto.setAccesorioId(item.getAccesorio().getIdAccesorio());
+            dto.setTipo("MOTO");
+            dto.setReferenciaId(item.getMoto().getIdMoto());
+            dto.setNombre(item.getMoto().getNombre()); // ajusta al campo real
+        } else if (item.getAccesorio() != null) {
+            dto.setTipo("ACCESORIO");
+            dto.setReferenciaId(item.getAccesorio().getIdAccesorio());
+            dto.setNombre(item.getAccesorio().getNombre()); // ajusta al campo real
+        } else {
+            dto.setTipo("DESCONOCIDO");
+            dto.setNombre("Ítem sin referencia");
         }
 
         return dto;
-    }
-
-    public CarritoItem toEntity(CarritoItemRequestDTO dto) {
-        CarritoItem item = new CarritoItem();
-
-        item.setCantidad(dto.getCantidad());
-
-        return item;
     }
 }

@@ -6,7 +6,6 @@ import com.motoextreme.motoextreme.mappers.CategoriaMapper;
 import com.motoextreme.motoextreme.models.entities.Categoria;
 import com.motoextreme.motoextreme.models.repositories.ICategoria;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

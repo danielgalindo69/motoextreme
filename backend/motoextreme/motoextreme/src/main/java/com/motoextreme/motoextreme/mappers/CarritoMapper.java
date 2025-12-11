@@ -3,7 +3,6 @@ package com.motoextreme.motoextreme.mappers;
 import com.motoextreme.motoextreme.dtos.response.CarritoResponseDTO;
 import com.motoextreme.motoextreme.models.entities.Carrito;
 import lombok.RequiredArgsConstructor;
-import org.mapstruct.Mapper;
 import org.springframework.stereotype.Component;
 
 import java.util.stream.Collectors;
@@ -20,7 +19,7 @@ public class CarritoMapper {
 
         CarritoResponseDTO dto = new CarritoResponseDTO();
         dto.setIdCarrito(carrito.getIdCarrito());
-        dto.setIdUsuario(carrito.getUsuario().getIdUsuario());
+        dto.setUsuarioId(carrito.getUsuario().getIdUsuario());
         dto.setTotal(carrito.getTotal() != null ? java.math.BigDecimal.valueOf(carrito.getTotal()) : java.math.BigDecimal.ZERO);
 
         dto.setItems(

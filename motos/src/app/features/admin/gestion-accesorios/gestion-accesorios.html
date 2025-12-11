@@ -1,0 +1,37 @@
+<h2>Gestión de Accesorios</h2>
+
+<!-- FORMULARIO PARA CREAR -->
+<form (ngSubmit)="crearAccesorio()">
+  <input [(ngModel)]="nuevo.nombre" name="nombre" placeholder="Nombre" required />
+  <input [(ngModel)]="nuevo.descripcion" name="descripcion" placeholder="Descripción" />
+  <input [(ngModel)]="nuevo.precio" name="precio" type="number" placeholder="Precio" required />
+  <input [(ngModel)]="nuevo.idCategoria" name="idCategoria" type="number" placeholder="ID Categoría" required />
+  <button type="submit">Crear</button>
+</form>
+
+<hr>
+
+<!-- LISTA DE ACCESORIOS -->
+<ul>
+  <li *ngFor="let acc of accesorios">
+
+    <!-- MODO VISUAL -->
+    <div *ngIf="!acc.editando">
+      {{ acc.nombre }} - {{ acc.precio }} COP - Categoría: {{ acc.idCategoria }}
+      <button type="button" (click)="habilitarEdicion(acc)">Editar</button>
+      <button type="button" (click)="eliminarAccesorio(acc.idAccesorio)">Eliminar</button>
+    </div>
+
+    <!-- MODO EDICIÓN -->
+    <div *ngIf="acc.editando" class="datos">
+      <input [(ngModel)]="acc.nombre" name="editNombre-{{acc.idAccesorio}}" placeholder="Nombre" />
+      <input [(ngModel)]="acc.descripcion" name="editDescripcion-{{acc.idAccesorio}}" placeholder="Descripción" />
+      <input [(ngModel)]="acc.precio" type="number" name="editPrecio-{{acc.idAccesorio}}" placeholder="Precio" />
+      <input [(ngModel)]="acc.idCategoria" type="number" name="editCategoria-{{acc.idAccesorio}}" placeholder="ID Categoría" />
+
+      <button type="button" (click)="guardarEdicion(acc)">Guardar</button>
+      <button type="button" (click)="cancelarEdicion(acc)">Cancelar</button>
+    </div>
+
+  </li>
+</ul>

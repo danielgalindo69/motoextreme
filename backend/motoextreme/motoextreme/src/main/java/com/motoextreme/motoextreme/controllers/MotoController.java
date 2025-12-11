@@ -16,21 +16,18 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/motos")
 @RequiredArgsConstructor
-@PreAuthorize("hasRole('ADMIN')")
 public class MotoController {
 
     private final MotoService service;
 
     // Obtener todas las motos
     @GetMapping
-    @PreAuthorize("hasAnyRole('USER','ADMIN')")
     public ResponseEntity<List<MotoResponseDTO>> obtenerMotos() {
         return ResponseEntity.ok(service.findAll());
     }
 
     // Obtener moto por ID
     @GetMapping("/{id}")
-    @PreAuthorize("hasAnyRole('USER','ADMIN')")
     public ResponseEntity<Optional<MotoResponseDTO>> obtenerPorId(@PathVariable Long id) {
         return ResponseEntity.ok(service.findByid(id));
     }

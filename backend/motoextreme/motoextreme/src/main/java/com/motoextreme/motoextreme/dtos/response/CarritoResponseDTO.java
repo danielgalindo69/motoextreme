@@ -8,7 +8,7 @@ import java.util.List;
 @Data
 public class CarritoResponseDTO {
     private Long idCarrito;
-    private Long idUsuario;
+    private Long usuarioId;
     private BigDecimal total;
     private List<CarritoItemResponseDTO> items;
 }

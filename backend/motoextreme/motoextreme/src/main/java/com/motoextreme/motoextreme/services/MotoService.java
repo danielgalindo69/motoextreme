@@ -2,14 +2,12 @@ package com.motoextreme.motoextreme.services;
 
 import com.motoextreme.motoextreme.dtos.request.MotoRequestDTO;
 import com.motoextreme.motoextreme.dtos.response.MotoResponseDTO;
-import com.motoextreme.motoextreme.mappers.CategoriaMapper;
 import com.motoextreme.motoextreme.mappers.MotoMapper;
 import com.motoextreme.motoextreme.models.entities.Categoria;
 import com.motoextreme.motoextreme.models.entities.Moto;
 import com.motoextreme.motoextreme.models.repositories.ICategoria;
 import com.motoextreme.motoextreme.models.repositories.IMoto;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
@@ -23,7 +21,6 @@ public class MotoService {
 
     private final MotoMapper mapper;
 
-    private final CategoriaMapper categoriaMapper;
 
     private final ICategoria categoriaRepository;
 

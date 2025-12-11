@@ -7,7 +7,6 @@ import lombok.Data;
 @Entity
 @Data
 public class CarritoItem {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_carrito_item")
@@ -22,7 +21,6 @@ public class CarritoItem {
     @Positive(message = "El subtotal debe ser positivo")
     private Double subtotal;
 
-    // Relación con Carrito
     @ManyToOne
     @JoinColumn(name = "carrito_id", referencedColumnName = "id_carrito", nullable = false)
     private Carrito carrito;
@@ -34,4 +32,12 @@ public class CarritoItem {
     @ManyToOne
     @JoinColumn(name = "accesorio_id", referencedColumnName = "id_accesorio")
     private Accesorio accesorio;
+
+    @PrePersist
+    @PreUpdate
+    public void calcularSubtotal() {
+        if (precioUnitario == null) precioUnitario = 0.0;
+        if (cantidad < 0) cantidad = 0;
+        this.subtotal = cantidad * precioUnitario;
+    }
 }
