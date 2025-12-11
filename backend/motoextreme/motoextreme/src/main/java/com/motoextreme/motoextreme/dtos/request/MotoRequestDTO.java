@@ -13,4 +13,5 @@ public class MotoRequestDTO {
     private String cilindraje;
     private String potencia;
     private Long idCategoria;
+    private int stock;
 }

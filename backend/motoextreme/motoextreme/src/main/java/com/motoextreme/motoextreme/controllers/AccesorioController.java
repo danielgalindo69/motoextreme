@@ -11,54 +11,48 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
 @RestController
 @RequestMapping("/accesorios")
 @RequiredArgsConstructor
-
 public class AccesorioController {
 
     private final AccesorioService service;
 
-    // Obtener todos los accesorios
+    // GET — público
     @GetMapping
-    @PreAuthorize("hasAnyRole('USER','ADMIN')")
-    public ResponseEntity<List<AccesorioResponseDTO>> obtenerAccesorios() {
+    public ResponseEntity<List<AccesorioResponseDTO>> obtenerTodos() {
         return ResponseEntity.ok(service.obtenerTodos());
     }
 
-    // Obtener accesorio por id
+    // GET por id — público
     @GetMapping("/{id}")
-    @PreAuthorize("hasAnyRole('USER','ADMIN')")
     public ResponseEntity<AccesorioResponseDTO> obtenerPorId(@PathVariable Long id) {
         return ResponseEntity.ok(service.obtenerPorId(id));
     }
 
-    // Crear accesorio
+    // POST — ADMIN
     @PostMapping
     @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<AccesorioResponseDTO> crearAccesorio(@Valid @RequestBody AccesorioRequestDTO dto) {
-
-        AccesorioResponseDTO nuevo = service.crear(dto);
-        return ResponseEntity.status(HttpStatus.CREATED).body(nuevo);
+    public ResponseEntity<AccesorioResponseDTO> crear(@Valid @RequestBody AccesorioRequestDTO dto) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(service.crear(dto));
     }
 
-    // Actualizar accesorio
+    // PUT — ADMIN
     @PutMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<AccesorioResponseDTO> actualizarAccesorio(
+    public ResponseEntity<AccesorioResponseDTO> actualizar(
             @PathVariable Long id,
             @Valid @RequestBody AccesorioRequestDTO dto) {
-
-        AccesorioResponseDTO actualizado = service.actualizar(id, dto);
-        return ResponseEntity.ok(actualizado);
+        return ResponseEntity.ok(service.actualizar(id, dto));
     }
 
-    // Eliminar accesorio
+    // DELETE — ADMIN
     @DeleteMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<Void> eliminarAccesorio(@PathVariable Long id) {
+    public ResponseEntity<Void> eliminar(@PathVariable Long id) {
         service.eliminar(id);
         return ResponseEntity.noContent().build();
     }
 }
+
+

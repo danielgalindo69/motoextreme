@@ -1,11 +1,16 @@
 package com.motoextreme.motoextreme.models.entities;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 @Entity
-@Data
+@Getter @Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString(exclude = {"usuario", "items"})
 public class Carrito {
 
     @Id @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
@@ -17,13 +22,15 @@ public class Carrito {
     private Usuario usuario;
 
     @OneToMany(mappedBy = "carrito", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
     private List<CarritoItem> items = new ArrayList<>();
 
-    public Double getTotal() {
-        if (items == null) return 0.0;
+    @Column(precision = 10, scale = 2)
+    private BigDecimal total = BigDecimal.ZERO;
 
+    public BigDecimal calcularTotal() {
         return items.stream()
-                .mapToDouble(item -> item.getSubtotal() != null ? item.getSubtotal() : 0.0)
-                .sum();
+                .map(item -> item.getSubtotal() != null ? item.getSubtotal() : BigDecimal.ZERO)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 }

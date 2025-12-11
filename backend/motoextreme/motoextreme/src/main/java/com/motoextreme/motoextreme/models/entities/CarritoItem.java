@@ -1,8 +1,12 @@
 package com.motoextreme.motoextreme.models.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.PositiveOrZero;
 import lombok.Data;
+
+import java.math.BigDecimal;
 
 @Entity
 @Data
@@ -16,11 +20,13 @@ public class CarritoItem {
     @Positive(message = "La cantidad debe ser positiva")
     private int cantidad;
 
-    @Positive(message = "El precio unitario debe ser positivo")
-    private Double precioUnitario;
+    @PositiveOrZero(message = "El precio unitario debe ser positivo")
+    @Column(precision = 10, scale = 2)
+    private BigDecimal precioUnitario = BigDecimal.ZERO;
 
-    @Positive(message = "El subtotal debe ser positivo")
-    private Double subtotal;
+    @PositiveOrZero(message = "El subtotal debe ser positivo")
+    @Column(precision = 10, scale = 2)
+    private BigDecimal subtotal = BigDecimal.ZERO;
 
     // Relación con Carrito
     @ManyToOne
@@ -28,6 +34,7 @@ public class CarritoItem {
     private Carrito carrito;
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "moto_id", referencedColumnName = "id_moto")
     private Moto moto;
 

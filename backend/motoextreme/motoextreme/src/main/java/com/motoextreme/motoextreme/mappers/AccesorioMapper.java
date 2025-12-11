@@ -52,4 +52,18 @@ public class AccesorioMapper {
                 .map(this::toDTO)
                 .toList();
     }
+
+    private AccesorioResponseDTO mapToResponse(Accesorio accesorio) {
+
+        AccesorioResponseDTO dto = new AccesorioResponseDTO();
+
+        dto.setIdAccesorio(accesorio.getIdAccesorio());
+        dto.setNombre(accesorio.getNombre());
+        dto.setDescripcion(accesorio.getDescripcion());
+        dto.setPrecio(accesorio.getPrecio());
+        dto.setStock(accesorio.getStock());
+
+        return dto;
+    }
+
 }

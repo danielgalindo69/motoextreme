@@ -12,6 +12,7 @@ import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -23,95 +24,104 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import java.util.List;
 @Configuration
+@EnableWebSecurity
 @RequiredArgsConstructor
-@EnableMethodSecurity(prePostEnabled = true)
 public class SecurityConfig {
 
     private final JwtAuthenticationFilter jwtFilter;
     private final UserDetailsServiceImpl userDetailsService;
 
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
         http
                 .csrf(csrf -> csrf.disable())
-                .cors(cors -> cors.configurationSource(corsConfigurationSource())) // Luego lo activamos si quieres CORS global
+                .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .sessionManagement(session ->
                         session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 )
+                .authenticationProvider(authenticationProvider())
                 .authorizeHttpRequests(auth -> auth
-                        // Endpoints publicos (login / registro)
+
+                        // ==============================
+                        // 🔓 ENDPOINTS PÚBLICOS
+                        // ==============================
                         .requestMatchers("/auth/**").permitAll()
-
-                        // Usuarios
-                        .requestMatchers(HttpMethod.GET, "/usuarios/**").hasAnyRole("USER", "ADMIN")
-                        .requestMatchers(HttpMethod.POST, "/usuarios").permitAll() // registro
-                        .requestMatchers(HttpMethod.PUT, "/usuarios/**").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.DELETE, "/usuarios/**").hasRole("ADMIN")
-
-                        // Accesorios
+                        .requestMatchers(HttpMethod.GET, "/motos/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/accesorios/**").permitAll()
+
+                        // ==============================
+                        // 🔒 ENDPOINTS PROTEGIDOS
+                        // ==============================
+
+                        // Carrito (solo USER)
+                        .requestMatchers("/carrito/**").hasRole("USER")
+
+                        // ADMIN → motos
+                        .requestMatchers(HttpMethod.POST, "/motos/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/motos/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/motos/**").hasRole("ADMIN")
+
+                        // ADMIN → accesorios
                         .requestMatchers(HttpMethod.POST, "/accesorios/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.PUT, "/accesorios/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.DELETE, "/accesorios/**").hasRole("ADMIN")
 
-                        //  Carrito items
-                        .requestMatchers("/carrito-items/**").hasRole("USER")
-
-                        // Cualquier otro endpoint requiere autenticación
+                        // Cualquier otra cosa → requiere login
                         .anyRequest().authenticated()
-                )
+                );
 
-                .authenticationProvider(authenticationProvider())
-                .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
+        // Filtro JWT
+        http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }
 
-    // Servicio de autenticación con nuestro UserDetailsServiceImpl
+    // ==============================
+    // 🔧 Authentication Provider
+    // ==============================
     @Bean
     public AuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
+
         provider.setUserDetailsService(userDetailsService);
         provider.setPasswordEncoder(passwordEncoder());
+
         return provider;
     }
 
-    // AuthenticationManager para AuthService (login)
-    @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
-        return config.getAuthenticationManager();
-    }
-
-    // Encriptación segura
+    // ==============================
+    // 🔐 PasswordEncoder
+    // ==============================
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
+    // ==============================
+    // 🔐 AuthenticationManager
+    // ==============================
+    @Bean
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration config)
+            throws Exception {
+        return config.getAuthenticationManager();
+    }
+
+    // ==============================
+    // 🌐 CORS
+    // ==============================
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
-
-        // Aquí pones el origen frontend
-        config.setAllowedOrigins(List.of("http://localhost:4200"));
-
-        // Métodos permitidos
-        config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"));
-
-        // Headers permitidos
-        config.setAllowedHeaders(List.of("*"));
-
-        // Necesario si envia JWT o cookies
+        config.addAllowedOriginPattern("*");
+        config.addAllowedHeader("*");
+        config.addAllowedMethod("*");
         config.setAllowCredentials(true);
-
-        // Tiempo que el navegador guarda la config en cache
-        config.setMaxAge(3600L);
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", config);
 
         return source;
     }
-
 }
+

@@ -12,53 +12,46 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
-
 @RestController
 @RequestMapping("/motos")
 @RequiredArgsConstructor
-@PreAuthorize("hasRole('ADMIN')")
 public class MotoController {
 
     private final MotoService service;
 
-    // Obtener todas las motos
+    // GET — público
     @GetMapping
-    @PreAuthorize("hasAnyRole('USER','ADMIN')")
-    public ResponseEntity<List<MotoResponseDTO>> obtenerMotos() {
+    public ResponseEntity<List<MotoResponseDTO>> obtenerTodos() {
         return ResponseEntity.ok(service.findAll());
     }
 
-    // Obtener moto por ID
+    // GET por id — público
     @GetMapping("/{id}")
-    @PreAuthorize("hasAnyRole('USER','ADMIN')")
     public ResponseEntity<Optional<MotoResponseDTO>> obtenerPorId(@PathVariable Long id) {
         return ResponseEntity.ok(service.findByid(id));
     }
 
-    // Crear moto
+    // POST — ADMIN
     @PostMapping
     @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<MotoResponseDTO> crearMoto(
-            @Valid @RequestBody MotoRequestDTO dto) {
-
-        MotoResponseDTO nueva = service.crearMoto(dto);
-        return ResponseEntity.status(HttpStatus.CREATED).body(nueva);
+    public ResponseEntity<MotoResponseDTO> crear(@Valid @RequestBody MotoRequestDTO dto) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(service.crearMoto(dto));
     }
 
-    // Actualizar moto
+    // PUT — ADMIN
     @PutMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<MotoResponseDTO> actualizarMoto(@PathVariable Long id, @Valid @RequestBody MotoRequestDTO dto) {
-
-        MotoResponseDTO actualizada = service.actualizarMoto(id, dto);
-        return ResponseEntity.ok(actualizada);
+    public ResponseEntity<MotoResponseDTO> actualizar(@PathVariable Long id, @Valid @RequestBody MotoRequestDTO dto) {
+        return ResponseEntity.ok(service.actualizarMoto(id, dto));
     }
 
-    // Eliminar moto
+    // DELETE — ADMIN
     @DeleteMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<Void> eliminarMoto(@PathVariable Long id) {
+    public ResponseEntity<Void> eliminar(@PathVariable Long id) {
         service.eliminarMoto(id);
         return ResponseEntity.noContent().build();
     }
 }
+
+

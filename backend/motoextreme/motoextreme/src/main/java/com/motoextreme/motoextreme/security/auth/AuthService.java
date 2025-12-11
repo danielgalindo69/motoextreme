@@ -10,7 +10,6 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
 @Service
 @RequiredArgsConstructor
 public class AuthService {
@@ -20,12 +19,10 @@ public class AuthService {
     private final AuthenticationManager authenticationManager;
     private final JwtUtils jwtUtils;
 
-    /**
-     * LOGIN
-     */
+    // LOGIN
     public AuthResponse login(AuthRequest request) {
 
-        // Validar credenciales (Spring Security se encarga)
+        // Autenticación (si falla, lanza BadCredentialsException)
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         request.getEmail(),
@@ -33,19 +30,26 @@ public class AuthService {
                 )
         );
 
-        // Buscar usuario en la BD
+        // Buscar usuario en BD
         Usuario usuario = usuarioRepository.findByEmail(request.getEmail())
                 .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+
+        if (!usuario.isEnabled()) {
+            throw new RuntimeException("El usuario está deshabilitado");
+        }
 
         // Generar token
         String token = jwtUtils.generateToken(new UserDetailsImpl(usuario));
 
-        return new AuthResponse(token);
+        return new AuthResponse(
+                token,
+                usuario.getNombre(),
+                usuario.getEmail(),
+                usuario.getRol().name()
+        );
     }
 
-    /**
-     * REGISTRO
-     */
+    // REGISTRO
     public AuthResponse register(RegisterRequest request) {
 
         if (usuarioRepository.findByEmail(request.getEmail()).isPresent()) {
@@ -56,15 +60,20 @@ public class AuthService {
         usuario.setNombre(request.getNombre());
         usuario.setEmail(request.getEmail());
         usuario.setPassword(passwordEncoder.encode(request.getPassword()));
-
-        // Si no manda rol, por defecto queda USER
         usuario.setRol(request.getRol() != null ? request.getRol() : Rol.USER);
+        usuario.setEnabled(true);
 
         usuarioRepository.save(usuario);
 
-        // Generar token tras registrarse
+        // Generar token
         String token = jwtUtils.generateToken(new UserDetailsImpl(usuario));
 
-        return new AuthResponse(token);
+        return new AuthResponse(
+                token,
+                usuario.getNombre(),
+                usuario.getEmail(),
+                usuario.getRol().name()
+        );
     }
 }
+

@@ -2,6 +2,7 @@ package com.motoextreme.motoextreme.models.entities;
 
 import com.motoextreme.motoextreme.models.enums.Rol;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
@@ -15,7 +16,13 @@ public class Usuario {
 
     @NotBlank(message = "El nombre no puede estar vacio")
     private String nombre;
+
+    @Email(message = "El email debe tener un formato valido")
+    @NotBlank(message = "El email no puede estar vacio")
+    @Column(unique = true)
     private String email;
+
+
     private String password;
 
     @NotNull (message = "El rol no puede estar vacio")

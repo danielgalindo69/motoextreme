@@ -18,29 +18,4 @@ public class CarritoItemController {
 
     private final CarritoItemService service;
 
-    // Agregar un item al carrito
-    @PostMapping("/{carritoId}/agregar")
-    @PreAuthorize("hasAnyRole('USER','ADMIN')")
-    public ResponseEntity<CarritoItemResponseDTO> agregarItem(@PathVariable Long carritoId, @Valid @RequestBody CarritoItemRequestDTO dto) {
-
-        CarritoItemResponseDTO nuevo = service.agregarItemAlCarrito(carritoId, dto);
-        return ResponseEntity.status(HttpStatus.CREATED).body(nuevo);
-    }
-
-    // Actualizar la cantidad de un item en el carrito
-    @PutMapping("/{itemId}")
-    @PreAuthorize("hasAnyRole('USER','ADMIN')")
-    public ResponseEntity<CarritoItemResponseDTO> actualizarItem(@PathVariable Long itemId, @Valid @RequestBody CarritoItemRequestDTO dto) {
-
-        CarritoItemResponseDTO actualizado = service.actualizarItem(itemId, dto);
-        return ResponseEntity.ok(actualizado);
-    }
-
-    // Eliminar un item del carrito
-    @DeleteMapping("/{itemId}")
-    @PreAuthorize("hasAnyRole('USER','ADMIN')")
-    public ResponseEntity<Void> eliminarItem(@PathVariable Long itemId) {
-        service.eliminarItem(itemId);
-        return ResponseEntity.noContent().build();
-    }
 }

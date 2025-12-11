@@ -2,6 +2,7 @@ package com.motoextreme.motoextreme.services;
 
 import com.motoextreme.motoextreme.dtos.request.AccesorioRequestDTO;
 import com.motoextreme.motoextreme.dtos.response.AccesorioResponseDTO;
+import com.motoextreme.motoextreme.exeptions.ResourceNotFoundExeption;
 import com.motoextreme.motoextreme.mappers.AccesorioMapper;
 import com.motoextreme.motoextreme.models.entities.Accesorio;
 import com.motoextreme.motoextreme.models.entities.Categoria;
@@ -10,6 +11,7 @@ import com.motoextreme.motoextreme.models.repositories.ICategoria;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Service
@@ -22,42 +24,38 @@ public class AccesorioService {
 
     // Crear un accesorio
     public AccesorioResponseDTO crear(AccesorioRequestDTO dto) {
-
         Categoria categoria = categoriaRepository.findById(dto.getIdCategoria())
-                .orElseThrow(() -> new RuntimeException("Categoría no encontrada"));
+                .orElseThrow(() -> new ResourceNotFoundExeption("Categoría no encontrada"));
 
+        // Si tu mapper transforma precio Double -> BigDecimal, úsalo.
         Accesorio accesorio = accesorioMapper.toEntity(dto, categoria);
 
         Accesorio guardado = accesorioRepository.save(accesorio);
-
         return accesorioMapper.toDTO(guardado);
     }
 
     // Actualizar un accesorio existente
     public AccesorioResponseDTO actualizar(Long id, AccesorioRequestDTO dto) {
-
         Accesorio accesorio = accesorioRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Accesorio no encontrado"));
+                .orElseThrow(() -> new ResourceNotFoundExeption("Accesorio no encontrado"));
 
         Categoria categoria = categoriaRepository.findById(dto.getIdCategoria())
-                .orElseThrow(() -> new RuntimeException("Categoría no encontrada"));
+                .orElseThrow(() -> new ResourceNotFoundExeption("Categoría no encontrada"));
 
-        // Actualizar campos
         accesorio.setNombre(dto.getNombre());
         accesorio.setDescripcion(dto.getDescripcion());
-        accesorio.setPrecio(dto.getPrecio());
+        // dto.getPrecio() viene Double => convertir a BigDecimal
+        accesorio.setPrecio(dto.getPrecio() != null ? (dto.getPrecio()) : BigDecimal.ZERO);
         accesorio.setCategoria(categoria);
 
         Accesorio actualizado = accesorioRepository.save(accesorio);
-
         return accesorioMapper.toDTO(actualizado);
     }
 
-    // Obtener un accesorio por ID
+    // Obtener por ID
     public AccesorioResponseDTO obtenerPorId(Long id) {
         Accesorio accesorio = accesorioRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Accesorio no encontrado"));
-
+                .orElseThrow(() -> new ResourceNotFoundExeption("Accesorio no encontrado"));
         return accesorioMapper.toDTO(accesorio);
     }
 
@@ -67,11 +65,12 @@ public class AccesorioService {
         return accesorioMapper.toDTOList(accesorios);
     }
 
-    // Eliminar accesorio
+    // Eliminar
     public void eliminar(Long id) {
         if (!accesorioRepository.existsById(id)) {
-            throw new RuntimeException("El accesorio no existe");
+            throw new ResourceNotFoundExeption("El accesorio no existe");
         }
         accesorioRepository.deleteById(id);
     }
 }
+

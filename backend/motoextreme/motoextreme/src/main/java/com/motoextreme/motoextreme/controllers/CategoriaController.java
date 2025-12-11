@@ -1,4 +1,5 @@
 package com.motoextreme.motoextreme.controllers;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 
 import com.motoextreme.motoextreme.dtos.request.CategoriaRequestDTO;
@@ -10,60 +11,46 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/categorias")
-@PreAuthorize(("hasRole('ADMIN')"))
+@RequiredArgsConstructor
 public class CategoriaController {
 
     private final CategoriaService service;
 
-    public CategoriaController(CategoriaService service) {
-        this.service = service;
-    }
-
-    // Obtener todas las categorías
+    // Público
     @GetMapping
-    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     public ResponseEntity<List<CategoriaResponseDTO>> obtenerCategorias() {
         return ResponseEntity.ok(service.traerCategorias());
     }
 
-    // Crear categoría
+    @GetMapping("/{id}")
+    public ResponseEntity<Optional<CategoriaResponseDTO>> obtenerPorId(@PathVariable Long id) {
+        return ResponseEntity.ok(service.buscarCategoriaPorId(id));
+    }
+
+    // ADMIN
     @PostMapping
     @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<CategoriaResponseDTO> crearCategoria(
-            @Valid @RequestBody CategoriaRequestDTO categoriaDTO) {
-
-        CategoriaResponseDTO creada = service.crearCategoria(categoriaDTO);
-        return ResponseEntity.status(HttpStatus.CREATED).body(creada);
+    public ResponseEntity<CategoriaResponseDTO> crear(@Valid @RequestBody CategoriaRequestDTO dto) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(service.crearCategoria(dto));
     }
 
-    // Obtener categoría por ID
-    @GetMapping("/{id}")
-    @PreAuthorize("hasAnyRole('USER','ADMIN')")
-    public ResponseEntity<CategoriaResponseDTO> obtenerPorId(@PathVariable Long id) {
-        return service.buscarCategoriaPorId(id)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
-    }
-
-    // Actualizar categoría
     @PutMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<CategoriaResponseDTO> actualizarCategoria(
+    public ResponseEntity<CategoriaResponseDTO> actualizar(
             @PathVariable Long id,
-            @Valid @RequestBody CategoriaRequestDTO categoriaDTO) {
-
-        CategoriaResponseDTO actualizada = service.actualizarCategoria(id, categoriaDTO);
-        return ResponseEntity.ok(actualizada);
+            @Valid @RequestBody CategoriaRequestDTO dto) {
+        return ResponseEntity.ok(service.actualizarCategoria(id, dto));
     }
 
-    // Eliminar categoría
     @DeleteMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<Void> eliminarCategoria(@PathVariable Long id) {
+    public ResponseEntity<Void> eliminar(@PathVariable Long id) {
         service.borrarCategoria(id);
         return ResponseEntity.noContent().build();
     }
 }
+
