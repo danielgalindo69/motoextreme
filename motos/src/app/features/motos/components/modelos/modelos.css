@@ -3,16 +3,11 @@
   background-color: #010206;
 }
 
-.titulo{
-  color: white;
-  padding: 110px 0 20px 30px;
-}
+.titulo{ color: white;padding: 110px 0 20px 30px;}
 
 .titulo h2{ font-size: 40px; font-weight: 100; margin: 0;}
 
-.filtro{
-  padding: 10px 30px;
-}
+.filtro{ padding: 10px 30px;}
 
 .side-bar{
   background-color: #040819;
@@ -36,4 +31,68 @@ label{
   display: flex;
   font-size: 14px;
   font-weight: 100;
+}
+
+.categoria{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.categoria input{ display: none;} /* se oculta el checkbox real */
+
+.check{
+  width: 15px;
+  height: 15px;
+  border: 1px solid #182541;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.categoria input:checked + .check{
+  background-color: #e7000b;
+  border: none;
+}
+
+.categoria input:checked + .check::before{
+  content: "✔";
+  color: white;
+  font-size: 12px;
+}
+
+.price-range-seccion{
+  position: relative;
+  display: flex;
+  padding-top: 8px;
+  flex-direction: column-reverse;
+}
+
+.price-range{
+  position: absolute;
+  width: 100%;
+  height: 4px;
+  background: none;
+  pointer-events: none;
+}
+
+.price-range::-webkit-slider-thumb{
+  pointer-events: auto;
+  width: 8px;
+  height: 8px;
+  cursor: pointer;
+}
+
+.price-values{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 8px;
+  color: white;
+}
+
+.price-values span{
+  color: white;
+  font-size: 11px;
 }

@@ -4,53 +4,87 @@
     <h2>Explora Nuestros <span>Modelos</span></h2>
   </div>
 
-  <div class="filtro">
-    <div class="side-bar">
-      <p><span>|</span> Categorías</p>
+  <div>
+    <div class="filtro">
+      <div class="side-bar">
+        <p><span>|</span> Categorías</p>
 
-      <div class="checkBox">
-        <label class="todas">
-          <input type="checkbox">
-          <span class="check"></span>
-          Todas
-        </label>
+        <div class="checkBox">
+          <label class="categoria">
+            <!-- Recibe el evento del checkbox (lógica de agregar o quitar categorías) -->
+            <input type="checkbox" value="todas" (change)="toggleCategory($event)">
+            <span class="check"></span>
+            Todas
+          </label>
 
-        <label class="deportiva">
-          <input type="checkbox">
-          <span class="check"></span>
-          Deportiva
-        </label>
+          <label class="categoria">
+            <input type="checkbox" value="deportiva" (change)="toggleCategory($event)">
+            <span class="check"></span>
+            Deportiva
+          </label>
 
-        <label class="cruiser">
-          <input type="checkbox">
-          <span class="check"></span>
-          Cruiser
-        </label>
+          <label class="categoria">
+            <input type="checkbox" value="cruiser" (change)="toggleCategory($event)">
+            <span class="check"></span>
+            Cruiser
+          </label>
 
-        <label class="naked">
-          <input type="checkbox">
-          <span class="check"></span>
-          Naked
-        </label>
+          <label class="categoria">
+            <input type="checkbox" value="naked" (change)="toggleCategory($event)">
+            <span class="check"></span>
+            Naked
+          </label>
 
-        <label class="adventure">
-          <input type="checkbox">
-          <span class="check"></span>
-          Adventure
-        </label>
+          <label class="categoria">
+            <input type="checkbox" value="adventure" (change)="toggleCategory($event)">
+            <span class="check"></span>
+            Adventure
+          </label>
 
-        <label class="touring">
-          <input type="checkbox">
-          <span class="check"></span>
-          Touring
-        </label>
-      </div>
+          <label class="categoria">
+            <input type="checkbox" value="touring" (change)="toggleCategory($event)">
+            <span class="check"></span>
+            Touring
+          </label>
+        </div>
 
-      <div>
-        <p><span>|</span>Rango de Precio</p>
-        <input type="range">
+  <!---->
+
+        <div class="price-range-seccion">
+          <p><span>|</span>Rango de Precio</p>
+
+          <input
+            type="range"
+            id="minPrice"
+            class="price-range"
+            min="3000000"
+            max="70000000"
+            value="3000000"
+            (input)="updateMinPrice($event)"
+          >
+
+          <input
+            type="range"
+            id="maxPrice"
+            class="price-range"
+            min="3000000"
+            max="70000000"
+            value="70000000"
+            (input)="updateMaxPrice($event)"
+          >
+        </div>
+
+        <div class="price-values">
+          <span>${{ minValue | number:'1.0-0' }}</span>
+          <span>${{ maxValue | number:'1.0-0' }}</span>
+        </div>
       </div>
     </div>
-  </div>
 
+    <div>
+      <div></div>
+      <app-card-modelos></app-card-modelos>
+    </div>
+
+  </div>
 </div>
