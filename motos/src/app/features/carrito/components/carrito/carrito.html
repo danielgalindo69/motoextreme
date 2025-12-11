@@ -1,0 +1,10 @@
+<div>
+  <h2>Mi Carrito</h2>
+  <ul>
+    <li *ngFor="let item of carrito?.items">
+      {{ item.nombre }} - Cantidad: {{ item.cantidad }} - Subtotal: {{ item.subtotal }}
+      <button (click)="eliminarItem(item.idItem)">Eliminar</button>
+    </li>
+  </ul>
+  <p>Total: {{ carrito?.total }}</p>
+</div>

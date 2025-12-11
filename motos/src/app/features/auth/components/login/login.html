@@ -1,14 +1,15 @@
-<div>
-  <form [formGroup]="FormLogin">
-  <label for="">Ingrese el usuario</label>
-  <input type="text" id="user" formControlName="user">
-  <label for="">Ingrese la contraseña</label>
-  <input type="text" id="password" formControlName="password">
-  @if (FormLogin.invalid) {
-    <p>requerido</p>
-  }
+<app-header></app-header>
 
-  <button (click)="Login()">mandar</button>
-</form>
+<div class="login-container">
+  <h1>Iniciar sesion</h1>
+  <form [formGroup]="loginForm" (ngSubmit)="onLogin()" class="login-form">
+    <input type="email" formControlName="email" placeholder="Correo electrónico" />
+    <input type="password" formControlName="password" placeholder="Contraseña" />
+    <button type="submit">Ingresar</button>
+  </form>
 
+  <p>
+    ¿No tienes cuenta?
+    <a routerLink="/registrar">Registrarse</a>
+  </p>
 </div>

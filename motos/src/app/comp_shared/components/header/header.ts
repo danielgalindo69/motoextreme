@@ -1,16 +1,14 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { RouterLink, RouterLinkActive, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-header',
-  imports: [RouterModule],
+  standalone: true,
+  imports: [RouterLink, RouterLinkActive, RouterModule, CommonModule],
   templateUrl: './header.html',
-  styleUrl: './header.css'
+  styleUrls: ['./header.css']
 })
 export class Header {
-  menuOpen: boolean = false;
-
-  desplegableMenu(){
-    this.menuOpen = !this.menuOpen
-  }
+    mostrarMenu = false;
 }

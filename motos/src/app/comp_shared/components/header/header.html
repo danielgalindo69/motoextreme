@@ -1,15 +1,28 @@
-<nav [class.open] = "menuOpen">
+<nav>
   <h1>MOTO<span>ELITE</span></h1>
-  <button (click)="desplegableMenu()" class="menuH">
+  <button  class="menuH">
     <svg xmlns="http://www.w3.org/2000/svg" width="26" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" color="white" background-color="transparent" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-menu-2"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 6l16 0" /><path d="M4 12l16 0" /><path d="M4 18l16 0" /></svg>
   </button>
 
-  <ul [class.open] = "menuOpen">
+  <ul>
     <li><a routerLink="/" routerLinkActive="active">Inicio</a></li>
     <li><a routerLink="/modelos" routerLinkActive="active">Modelos</a></li>
     <li><a routerLink="/accesorios" routerLinkActive="active">Accesorios</a></li>
-    <li><a routerLink="/contacto" routerLinkActive="active">Contacto</a></li>
-    <li><a routerLink="/login" routerLinkActive="active">Login</a></li>
-    <li><a routerLink="/registrar" routerLinkActive="active">Registrar</a></li>
+   <div class="user-menu">
+  <button class="user-icon btn-rojo" (click)="mostrarMenu = !mostrarMenu">
+    <i class="fi fi-rr-user"></i> Iniciar sesion
+  </button>
+
+  <div class="dropdown" *ngIf="mostrarMenu">
+    <a routerLink="/login" routerLinkActive="active">
+      <i class="fi fi-rr-sign-in-alt"></i> Iniciar Sesión
+    </a>
+
+    <a routerLink="/registrar" routerLinkActive="active">
+      <i class="fi fi-rr-user-add"></i> Crear Cuenta
+    </a>
+  </div>
+</div>
+
   </ul>
 </nav>
