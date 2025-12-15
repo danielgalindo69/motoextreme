@@ -41,7 +41,7 @@ export class Login {
 
           // Redirigir según rol
         if (rol === 'ROLE_ADMIN' || rol === 'ADMIN') {
-          this.router.navigate(['/admin']);
+          this.router.navigate(['/admin/usuarios']);
         } else {
           this.router.navigate(['/user/inicio']);
         }

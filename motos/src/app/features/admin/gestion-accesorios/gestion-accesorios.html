@@ -1,36 +1,42 @@
 <h2>Gestión de Accesorios</h2>
 
 <!-- FORMULARIO PARA CREAR -->
-<form (ngSubmit)="crearAccesorio()">
+<div class="form-crear">
   <input [(ngModel)]="nuevo.nombre" name="nombre" placeholder="Nombre" required />
   <input [(ngModel)]="nuevo.descripcion" name="descripcion" placeholder="Descripción" />
   <input [(ngModel)]="nuevo.precio" name="precio" type="number" placeholder="Precio" required />
   <input [(ngModel)]="nuevo.idCategoria" name="idCategoria" type="number" placeholder="ID Categoría" required />
-  <button type="submit">Crear</button>
-</form>
+
+  <button (click)="crearAccesorio()">Crear Accesorio</button>
+</div>
 
 <hr>
 
 <!-- LISTA DE ACCESORIOS -->
 <ul>
-  <li *ngFor="let acc of accesorios">
+  <li *ngFor="let acc of accesorios" class="item">
 
     <!-- MODO VISUAL -->
-    <div *ngIf="!acc.editando">
-      {{ acc.nombre }} - {{ acc.precio }} COP - Categoría: {{ acc.idCategoria }}
-      <button type="button" (click)="habilitarEdicion(acc)">Editar</button>
-      <button type="button" (click)="eliminarAccesorio(acc.idAccesorio)">Eliminar</button>
+    <div *ngIf="!acc.editando" class="info-usuario">
+      <div class="col"><strong>{{ acc.nombre }}</strong></div>
+      <div class="col">{{ acc.precio }} COP</div>
+      <div class="col">Categoria: {{ acc.idCategoria }}</div>
+
+      <div class="acciones">
+        <button class="btn-edit" (click)="habilitarEdicion(acc)">Editar</button>
+        <button class="btn-delete" (click)="eliminarAccesorio(acc.idAccesorio)">Eliminar</button>
+      </div>
     </div>
 
     <!-- MODO EDICIÓN -->
-    <div *ngIf="acc.editando" class="datos">
+    <div *ngIf="acc.editando" class="form-crear">
       <input [(ngModel)]="acc.nombre" name="editNombre-{{acc.idAccesorio}}" placeholder="Nombre" />
       <input [(ngModel)]="acc.descripcion" name="editDescripcion-{{acc.idAccesorio}}" placeholder="Descripción" />
       <input [(ngModel)]="acc.precio" type="number" name="editPrecio-{{acc.idAccesorio}}" placeholder="Precio" />
       <input [(ngModel)]="acc.idCategoria" type="number" name="editCategoria-{{acc.idAccesorio}}" placeholder="ID Categoría" />
 
-      <button type="button" (click)="guardarEdicion(acc)">Guardar</button>
-      <button type="button" (click)="cancelarEdicion(acc)">Cancelar</button>
+      <button class="btn-save" (click)="guardarEdicion(acc)">Guardar</button>
+      <button (click)="cancelarEdicion(acc)">Cancelar</button>
     </div>
 
   </li>
