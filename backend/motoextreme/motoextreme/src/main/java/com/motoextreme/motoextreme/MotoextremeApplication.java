@@ -9,7 +9,7 @@ public class MotoextremeApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(MotoextremeApplication.class, args);
-		System.out.println(new BCryptPasswordEncoder().encode("admn"));
+		System.out.println(new BCryptPasswordEncoder().encode("admin"));
 
 	}
 

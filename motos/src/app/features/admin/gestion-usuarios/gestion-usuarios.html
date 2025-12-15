@@ -3,17 +3,18 @@
 
   <!-- FORM CREAR -->
   <div class="form-crear">
-    <input [(ngModel)]="nuevoUsuario.nombre" placeholder="Nombre" />
-    <input [(ngModel)]="nuevoUsuario.email" placeholder="Email" />
-    <input [(ngModel)]="nuevoUsuario.password" placeholder="Password" />
+  <input [(ngModel)]="nuevoUsuario.nombre" placeholder="Nombre" />
+  <input [(ngModel)]="nuevoUsuario.email" placeholder="Email" />
+  <input [(ngModel)]="nuevoUsuario.password" placeholder="Password" />
 
-    <select [(ngModel)]="nuevoUsuario.rol">
-      <option value="ADMIN">ADMIN</option>
-      <option value="USER">USER</option>
-    </select>
+  <select [(ngModel)]="nuevoUsuario.rol">
+    <option value="ADMIN">ADMIN</option>
+    <option value="USER">USER</option>
+  </select>
 
-    <button (click)="crearUsuario()">Crear Usuario</button>
-  </div>
+  <button (click)="crearUsuario()">Crear Usuario</button>
+</div>
+
 
   <!-- LISTA -->
   <ul>
@@ -35,10 +36,19 @@
 
       <!-- MODO NORMAL -->
       <ng-template #mostrar>
-        <span><strong>{{ u.nombre }}</strong> — {{ u.email }} ({{ u.rol }})</span>
-        <button class="btn-edit" (click)="editar(u)">Editar</button>
-        <button class="btn-delete" (click)="eliminar(u.idUsuario)">Eliminar</button>
-      </ng-template>
+  <div class="info-usuario">
+    <div class="col"><strong>{{ u.nombre }}</strong></div>
+    <div class="col">{{ u.email }}</div>
+    <div class="col">{{ u.rol }}</div>
+
+    <div class="acciones">
+      <button class="btn-edit" (click)="editar(u)">Editar</button>
+      <button class="btn-delete" (click)="eliminar(u.idUsuario)">Eliminar</button>
+    </div>
+  </div>
+</ng-template>
+
+
 
     </li>
   </ul>
