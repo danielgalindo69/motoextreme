@@ -9,7 +9,7 @@ import { UserHeader } from '../../../../comp_shared/components/user-header/user-
 
 @Component({
   selector: 'app-inicio',
-  imports: [Card, CommonModule, InfoCard, Footer, UserHeader],
+  imports: [Card, CommonModule, InfoCard, Footer, UserHeader, RouterLink],
   templateUrl: './userinicio.html',
   styleUrl: './userinicio.css',
 })

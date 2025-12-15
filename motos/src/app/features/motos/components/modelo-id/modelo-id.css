@@ -1,6 +1,46 @@
-div{
+*{
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.card{
+  border-radius: 15px;
+  padding: 30px;
+  height: auto;
+  color: white;
+  background-color: #040819;
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  box-shadow: 0 0 25px rgba(231, 0, 11, 0.2);
+  transform: scale(1.02);
+}
+
+.flex{
+  flex-direction: column;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+}
+
+.flex h5, .flex p{
+  margin: 0;
+}
+
+.flex h5{
+  color: #4c5054;
+  padding-top: 12px;
+}
+
+.prim{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.descripcion{
+  width: 450px;
+}
+
+.seg{
+  display: flex;
+  gap: 130px;
 }

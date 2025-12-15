@@ -1,139 +1,52 @@
 <app-header></app-header>
 
 <div class="modelos">
-
-<<<<<<< HEAD
-  <div class="titulo">
-    <h2>Explora Nuestros <span>Modelos</span></h2>
-  </div>
-
-  <div>
-    <div class="filtro">
-      <div class="side-bar">
-        <p><span>|</span> Categorías</p>
-
-        <div class="checkBox">
-          <label class="categoria">
-            <!-- Recibe el evento del checkbox (lógica de agregar o quitar categorías) -->
-            <input type="checkbox" value="todas" (change)="toggleCategory($event)">
-            <span class="check"></span>
-            Todas
-          </label>
-
-          <label class="categoria">
-            <input type="checkbox" value="deportiva" (change)="toggleCategory($event)">
-            <span class="check"></span>
-            Deportiva
-          </label>
-
-          <label class="categoria">
-            <input type="checkbox" value="cruiser" (change)="toggleCategory($event)">
-            <span class="check"></span>
-            Cruiser
-          </label>
-
-          <label class="categoria">
-            <input type="checkbox" value="naked" (change)="toggleCategory($event)">
-            <span class="check"></span>
-            Naked
-          </label>
-
-          <label class="categoria">
-            <input type="checkbox" value="adventure" (change)="toggleCategory($event)">
-            <span class="check"></span>
-            Adventure
-          </label>
-
-          <label class="categoria">
-            <input type="checkbox" value="touring" (change)="toggleCategory($event)">
-            <span class="check"></span>
-            Touring
-          </label>
-        </div>
-
-  <!---->
-
-        <div class="price-range-seccion">
-          <p><span>|</span>Rango de Precio</p>
-
-          <input
-            type="range"
-            id="minPrice"
-            class="price-range"
-            min="3000000"
-            max="70000000"
-            value="3000000"
-            (input)="updateMinPrice($event)"
-          >
-
-          <input
-            type="range"
-            id="maxPrice"
-            class="price-range"
-            min="3000000"
-            max="70000000"
-            value="70000000"
-            (input)="updateMaxPrice($event)"
-          >
-        </div>
-
-        <div class="price-values">
-          <span>${{ minValue | number:'1.0-0' }}</span>
-          <span>${{ maxValue | number:'1.0-0' }}</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="lista-motos">
-      <div *ngFor="let moto of motosFiltradas" class="card-moto">
-        <h3>{{ moto.nombre }}</h3>
-        <p>Categoría: {{ moto.categoria }}</p>
-        <p>Precio: ${{ moto.precio | number:'1.0-0' }}</p>
-      </div>
-    </div>
-
-=======
   <aside class="side-bar">
     <h3 class="titulo-filtro">Categorías</h3>
     <div class="checkBox">
-      <label><input type="checkbox"> Todas</label>
-      <label><input type="checkbox"> Deportiva</label>
-      <label><input type="checkbox"> Cruiser</label>
-      <label><input type="checkbox"> Naked</label>
-      <label><input type="checkbox"> Adventure</label>
-      <label><input type="checkbox"> Touring</label>
+      <label><input type="checkbox" value="Deportivas" (change)="toggleCategoria($event)"> Deportivas</label>
+      <label><input type="checkbox" value="Scrambler" (change)="toggleCategoria($event)"> Scrambler</label>
+      <label><input type="checkbox" value="Cruiser" (change)="toggleCategoria($event)"> Cruiser</label>
+      <label><input type="checkbox" value="Supermotorad" (change)="toggleCategoria($event)"> Supermotorad</label>
+      <label><input type="checkbox" value="Naked" (change)="toggleCategoria($event)"> Naked</label>
+      <label><input type="checkbox" value="Doble Propósito" (change)="toggleCategoria($event)"> Doble Propósito</label>
+      <label><input type="checkbox" value="Adventure" (change)="toggleCategoria($event)"> Adventure</label>
+      <label><input type="checkbox" value="Urbanas" (change)="toggleCategoria($event)"> Urbanas</label>
+      <label><input type="checkbox" value="Scooter" (change)="toggleCategoria($event)"> Scooter</label>
     </div>
 
     <h3 class="titulo-filtro">Rango de Precio</h3>
-    <input type="range" min="0" max="30000">
-
-    <h3 class="titulo-filtro">Año</h3>
-    <div class="checkBox">
-      <label><input type="checkbox"> Todos</label>
-      <label><input type="checkbox"> 2025</label>
-      <label><input type="checkbox"> 2024</label>
-    </div>
+    <input type="range" min="0" max="80000000" step="1000000" [value]="maxValor" (input)="onPrecioChange($event)">
+    <p>Hasta: {{maxValor | number:'1.0-0' }}</p>
   </aside>
 
   <div class="contenedor-motos">
-
-    <h2 class="titulo">Lista de Motos</h2>
-
+    <h2 class="titulo">Explora Nuestros <span>Modelos</span></h2>
     <div class="grid-motos">
-      <div class="card-moto" *ngFor="let moto of motos">
+      <div class="card-moto" *ngFor="let moto of motosFiltradas">
 
         <div class="card-body">
           <span class="categoria">{{ moto.marca }}</span>
           <h3>{{ moto.nombre }}</h3>
-
           <p class="precio">${{ moto.precio }}</p>
-          <button [routerLink]="['/modelos', moto.idMoto]">Ver detalles</button>
-        </div>
 
+          <button (click)="abrirModal(moto.idMoto)">Ver detalles</button>
+        </div>
       </div>
     </div>
->>>>>>> 2ae4d97587b6b62a4b41d460c97db426298bf37e
   </div>
+
+  <!-- Modal de "ver detalles"-->
+  <div class="overlay" *ngIf="mostrarModal" (click)="cerrarModal()">
+    <div class="modal" (click)="$event.stopPropagation()">
+
+      <app-moto-detalle
+        [idMoto]="motoSeleccionada">
+      </app-moto-detalle>
+
+    </div>
+  </div>
+
 </div>
 
 <app-footer></app-footer>

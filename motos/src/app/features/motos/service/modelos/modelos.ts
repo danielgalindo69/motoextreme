@@ -29,15 +29,16 @@ export interface MotoRequestDTO {
 @Injectable({
   providedIn: 'root'
 })
+
 export class MotoService {
   private apiUrl = 'http://localhost:9595/motos';
   private apiMarcas = 'http://localhost:9595/categoria';
 
-  
+
   constructor(private http: HttpClient) {}
-getMotos(): Observable<MotoResponseDTO[]> {
-  return this.http.get<MotoResponseDTO[]>(`http://localhost:9595/motos`);
-}
+  getMotos(): Observable<MotoResponseDTO[]> {
+    return this.http.get<MotoResponseDTO[]>(`http://localhost:9595/motos`);
+  }
 
 
   getMotoById(id: number): Observable<MotoResponseDTO> {

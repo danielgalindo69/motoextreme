@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, Input, OnInit } from '@angular/core';
 import { MotoService, MotoResponseDTO } from '../../service/modelos/modelos';
 import { CommonModule } from '@angular/common';
 
@@ -12,18 +11,20 @@ import { CommonModule } from '@angular/common';
 })
 
 export class MotoDetalleComponent implements OnInit {
+
+  @Input() idMoto!: number;
   moto: MotoResponseDTO | null = null;
 
   constructor(
-    private route: ActivatedRoute,
     private motoService: MotoService
   ) {}
 
   ngOnInit(): void {
-    const id = Number(this.route.snapshot.paramMap.get('id'));
-    this.motoService.getMotoById(id).subscribe({
-      next: (data) => this.moto = data,
-      error: (err) => console.error('Error cargando moto por ID', err)
+    if (this.idMoto){
+      this.motoService.getMotoById(this.idMoto).subscribe({
+        next: (data) => this.moto = data,
+        error: (err) => console.error('Error cargando moto por ID', err)
     });
   }
+    }
 }

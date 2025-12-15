@@ -4,6 +4,7 @@ nav{
   background-image: linear-gradient(to right, rgb(0, 0, 0), rgba(7, 0, 0, 0.877));
   position: fixed;
   top: 0;
+  z-index: 2;
   width: 96%;
   height: 70px;
   display: flex;
