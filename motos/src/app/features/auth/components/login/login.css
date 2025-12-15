@@ -9,7 +9,7 @@
   flex-direction: column;      /* elementos en columna */
   justify-content: center;     /* centra verticalmente */
   align-items: center;         /* centra horizontalmente */
-  background-color: #000000;   /* fondo oscuro */
+  background: linear-gradient(100deg, #000000, rgb(35, 0, 6));
   color: #f0f0f0;              /* texto claro */
 }
 
@@ -21,7 +21,7 @@
   width: 100%;
   max-width: 400px;
   padding: 24px;
-  background-color: #1e1e1e;
+  background-color: #151515;
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.6);
 }
