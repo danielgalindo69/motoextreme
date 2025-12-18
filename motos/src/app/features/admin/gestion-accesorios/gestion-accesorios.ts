@@ -2,12 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { AccesorioService, AccesorioRequest, AccesorioResponse } from '../service/accesorios/accesorios';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { Footer } from '../../../comp_shared/components/footer/footer';
 
 @Component({
   selector: 'app-admin-accesorios',
   templateUrl: './gestion-accesorios.html',
   styleUrls: ['./gestion-accesorios.css'],
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, Footer],
   standalone: true,
 })
 export class GestionAccesorios implements OnInit {

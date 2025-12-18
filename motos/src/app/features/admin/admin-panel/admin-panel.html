@@ -1,10 +1,12 @@
 <div class="admin-panel">
-
   <nav class="admin-menu">
-    <button routerLink="/admin/usuarios"> Gestión de Usuarios</button>
-    <button routerLink="/admin/motos"> Gestión de Motos</button>
-    <button routerLink="/admin/accesorios"> Gestión de Accesorios</button>
-    <button class="logout-btn" (click)="logout()">Cerrar Sesión</button>
+    <h1>MOTO<span>ELITE</span></h1>
+    <ul>
+      <li routerLink="/admin/usuarios"> Gestión de Usuarios</li>
+      <li routerLink="/admin/motos"> Gestión de Motos</li>
+      <li routerLink="/admin/accesorios"> Gestión de Accesorios</li>
+      <li class="logout-btn" (click)="logout()">Cerrar Sesión</li>
+    </ul>
   </nav>
   <router-outlet></router-outlet>
 </div>
