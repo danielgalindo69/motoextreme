@@ -2,7 +2,6 @@ package com.motoextreme.motoextreme.dtos.request;
 
 import com.motoextreme.motoextreme.models.enums.Rol;
 import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

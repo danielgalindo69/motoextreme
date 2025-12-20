@@ -40,7 +40,6 @@ export class MotoService {
     return this.http.get<MotoResponseDTO[]>(`http://localhost:9595/motos`);
   }
 
-
   getMotoById(id: number): Observable<MotoResponseDTO> {
     return this.http.get<MotoResponseDTO>(`${this.apiUrl}/${id}`);
   }
