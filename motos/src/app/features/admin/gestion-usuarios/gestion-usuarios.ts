@@ -3,13 +3,14 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { UsuarioService } from '../service/usuarios/usuarios';
 import { UsuarioRequest, UsuarioResponse } from '../service/usuarios/usuarios';
+import { Footer } from '../../../comp_shared/components/footer/footer';
 
 @Component({
   selector: 'app-gestion-usuarios',
   standalone: true,
   templateUrl: './gestion-usuarios.html',
   styleUrls: ['./gestion-usuarios.css'],
-  imports: [CommonModule, FormsModule]
+  imports: [CommonModule, FormsModule, Footer]
 })
 export class GestionUsuarios implements OnInit {
 

@@ -56,9 +56,17 @@ export class CarritoService {
   }
 
   // 🔹 Agregar item al carrito
-  agregarItem(carritoId: number, dto: CarritoItemRequestDTO): Observable<CarritoItemResponseDTO> {
-    return this.http.post<CarritoItemResponseDTO>(`${this.apiUrl}/carrito-items/${carritoId}/agregar`, dto);
+  agregarItem(carritoId: number, dto: CarritoItemRequestDTO) {
+    const token = localStorage.getItem('token');
+    const headers = { Authorization: `Bearer ${token}` };
+
+    return this.http.post<CarritoItemResponseDTO>(
+      `${this.apiUrl}/carrito-items/${carritoId}/agregar`,
+      dto,
+      { headers }
+    );
   }
+
 
   // 🔹 Actualizar cantidad de un item
   actualizarItem(itemId: number, dto: CarritoItemRequestDTO): Observable<CarritoItemResponseDTO> {

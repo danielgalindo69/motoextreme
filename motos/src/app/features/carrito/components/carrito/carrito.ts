@@ -4,13 +4,15 @@ import { CarritoResponseDTO } from '../services';
 import { CarritoItemResponseDTO } from '../services';
 import { CarritoItemRequestDTO } from '../services';
 import { CommonModule } from '@angular/common';
+import { UserHeader } from '../../../../comp_shared/components/user-header/user-header';
+import { Footer } from "../../../../comp_shared/components/footer/footer";
 
 @Component({
   selector: 'app-carrito',
   templateUrl: './carrito.html',
   styleUrls: ['./carrito.css'],
   standalone: true,
-  imports: [CommonModule]
+  imports: [CommonModule, UserHeader, Footer]
 })
 export class CarritoComponent implements OnInit {
 

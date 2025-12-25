@@ -10,5 +10,5 @@ import { RouterLink, RouterLinkActive, RouterModule } from '@angular/router';
   styleUrls: ['./user-header.css']
 })
 export class UserHeader {
-    mostrarMenu = false;
+  mostrarMenu = false;
 }

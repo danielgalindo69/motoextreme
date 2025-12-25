@@ -1,9 +1,30 @@
-<div *ngIf="moto">
-  <h2>{{ moto.nombre }}</h2>
-  <p>{{ moto.descripcion }}</p>
-  <p><strong>Precio:</strong> ${{ moto.precio }}</p>
-  <p><strong>Marca:</strong> {{ moto.marca }}</p>
-  <p><strong>Modelo:</strong> {{ moto.modelo }}</p>
-  <p><strong>Cilindraje:</strong> {{ moto.cilindraje }} cc</p>
-  <p><strong>Potencia:</strong> {{ moto.potencia }} HP</p>
+<div *ngIf="moto" class="card">
+  <div class="prim">
+    <h2>{{ moto.nombre }}</h2>
+    <p>${{ moto.precio }}</p>
+  </div>
+
+  <p class="descripcion">{{ moto.descripcion }}</p>
+  <div class="flex">
+    <h5>Potencia</h5>
+    <p> {{ moto.potencia }} HP</p>
+  </div>
+
+  <div class="seg">
+    <div class="flex">
+      <h5>Marca</h5>
+      <p>{{ moto.marca }}</p>
+    </div>
+
+    <div class="flex">
+      <h5>Modelo</h5>
+      <p>{{ moto.modelo }}</p>
+    </div>
+  </div>
+
+  <div class="flex">
+    <h5>Cilindraje</h5>
+    <p>{{ moto.cilindraje }} cc</p>
+  </div>
+
 </div>

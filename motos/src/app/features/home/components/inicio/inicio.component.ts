@@ -8,7 +8,7 @@ import { Header } from "../../../../comp_shared/components/header/header";
 
 @Component({
   selector: 'app-inicio',
-  imports: [Card, CommonModule, InfoCard, Footer, Header],
+  imports: [Card, CommonModule, InfoCard, Footer, Header, RouterLink],
   templateUrl: './inicio.component.html',
   styleUrl: './inicio.component.css',
 })
